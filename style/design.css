@@ -1,0 +1,284 @@
+a, a:link, a:visited {
+    color:gray;
+    text-decoration:none;
+    font:  11px Verdana, Arial, Helvetica, sans-serif;
+}
+
+a:hover, a:active, a:focus {
+    color:red;
+    text-decoration:underline;
+}
+
+body {
+    margin: 0;
+    height: 101%;
+}
+/*#logotyp
+{
+	position: absolute;
+	left: 450px;
+	top: 93px;
+}*/
+#head {
+    position: relative;
+    top: 0px;
+    height: 150px;
+    width: 975px;
+    margin-left: auto;
+    margin-right: auto;
+    background-image:url(../grafik/bild_head.png); background-repeat:no-repeat;
+    background-position: right;
+    padding: 0 10px;
+    z-index: 100;
+}
+/*
+.mail_table_head
+{
+	background-image:url(../grafik/logo_typ_deradvokat.png); background-repeat:no-repeat;
+	height:150px;
+	width:100%;
+	background-position:right center;
+}
+.mail_table_head_1
+{
+	background-image:url(../grafik/logo_typ_kanzlei_strauch.png); background-repeat:no-repeat;
+	height:180px;
+	width:100%;
+	text-all;
+}*/
+.home_head {
+    background-image: none !important;
+    text-align: center;
+}
+
+#contentwrapper {
+    position: relative;
+    width: 1007px;
+    margin-left: auto;
+    margin-right: auto;
+    background-image:url(../grafik/navbg.gif);
+    background-repeat: repeat-y;
+}
+#artikelubersicht {
+    width:100%;
+    height:300px;
+    overflow: scroll;
+}
+
+#empfangerubersicht {
+    width:100%;
+    height:300px;
+    overflow: scroll;
+}
+
+#content_bereich {
+    width:800px;
+    height:100%;
+    background-image:url(../grafik/seite2_hintergrund.jpg); background-repeat:no-repeat;
+}
+
+#navi_homepage {
+    /*position:absolute;
+    top: 270px;
+    left: 340px;
+    z-index:1;*/
+}
+
+#main {
+    background-color:#0A264E;
+}
+
+#navi {
+    color: #EFEFEF;
+    float: left;
+    min-height: 615px;
+    padding-bottom: 0;
+    padding-left: 10px;
+    padding-right: 0;
+    padding-top: 15px;
+    width: 190px;
+}
+
+
+#nav_content_wrapper {
+    margin: 0 auto 0 auto;
+    text-align: left;
+    width: 250px;
+    padding-top: 80px;
+}
+
+#nav_content_wrapper a {
+    font-size: 14px !important;
+}
+
+.nav2 a {
+    color: #EFEFEF !important;
+    font-weight: bold;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -150px;
+    float: none !important;
+    min-height: 450px !important;
+    height: 560px;
+    background-color: transparent !important;
+    background-image:url(../grafik/bild_startseite.jpg) !important;
+    background-repeat:no-repeat !important;
+    background-position: right -15px;
+    width:950px !important;
+    padding: 170px 20px 20px 20px !important;
+    position: relative;
+    text-align: center;
+    color: #7F7F7F !important;
+}
+
+.center a {
+    color: #7F7F7F !important;
+    font-size: 17px !important;
+}
+
+#content {
+    color:gray; font: 11px Verdana, Arial, Helvetica, sans-serif;
+    width:770px;
+    min-height:615px;
+    background-image:url(../grafik/seite2_hintergrund.jpg); background-repeat:no-repeat;
+    margin-left:210px;
+    padding: 10px;
+}
+
+#content li, #content li a {
+    font-size: 15px !important;
+    width:100% !important;
+    color: #0A264E !important;
+    margin: 10px auto !important;
+}
+
+#head img {
+    /*margin-top: 10px;*/
+    margin-bottom: auto;
+}
+/*
+#seiten_blatt {
+  padding:10px;
+  text-align: center;
+}*/
+
+#content_bild {
+  float:left;
+  padding:10px;
+}
+
+#home_uberschrift_content {
+    margin-left:auto;
+    margin-right:auto;
+    position:relative;
+    top:-10px;
+    width:560px;
+    font: 14px Verdana, Arial, Helvetica, sans-serif;
+    color: #0A264E;
+}
+
+.fehlermeldung
+{color:red; text-align: center;}
+
+.erfolgsmeldung
+{color:green; text-align: center;}
+
+.error
+{border: red 1px solid;}
+#error
+{
+	color:red;
+	font:11px Verdana,Arial,Helvetica,sans-serif;
+	margin-left:auto;
+	margin-right:auto;
+	width:999px;
+}
+hr {
+    border:1px solid gray;
+    padding:0;
+    width:100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contenttable {
+      padding:10px;
+      /*text-align: justify;*/
+}
+.contenttable, .contentbox{
+      margin-left:auto;
+      margin-right:auto;
+      border: 1px solid #9FC6FF; 
+      background-image:url(../grafik/transparent50.png)
+}
+
+th {
+    text-align: left;
+}
+
+.contentbox {
+    padding: 10px 15px;
+}
+
+ul {
+    padding-left: 15px;
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+ul li {
+    margin: 0;
+    padding: 0;
+}
+
+input[type="text"]:focus, input[type="text"]:hover, input[type="text"]:active,
+input[type="password"]:focus, input[type="password"]:hover, input[type="password"]:active,
+select:focus, select:hover, select:active,
+textarea:focus, textarea:hover, textarea:active {
+    border: 1px solid #000;
+    background:#fff none repeat scroll;
+}
+
+input[type="text"], input[type="password"], select, textarea  {
+    border: 1px solid #8f8f8f;
+    background:transparent url(../grafik/transparent70.png) repeat scroll;
+}
+
+h1 {
+    font-size: 16px;
+    font-weight: bold;
+    font-variant: small-caps;
+    color: #0A264E;
+}
+
+h2 {
+    width:100%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 16px;
+    color: #0A264E;
+}
+
+h2 a {
+    font-size: 16px !important;
+    font-weight: bold !important;
+}
+
+h3 {
+    width:100%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 13px;
+}
+
+h3 a {
+    font-size: 13px !important;
+    font-weight: bold !important;
+}
+#user_liste div
+{
+
+}	

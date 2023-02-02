@@ -1,0 +1,83 @@
+RewriteEngine On
+
+RewriteRule ^rechner$    ?task=rechner [L]
+RewriteRule ^test$    ?task=test [L]
+RewriteRule ^newsletter_archive$   ?task=newsletter_archive [L]
+RewriteRule ^newsletter_user_neu$   ?task=neu_empfanger [L]
+RewriteRule ^newsletter_menu$   ?task=newsletter_menu [L]
+RewriteRule ^newsletter$   ?task=newsletter [L]
+
+
+RewriteRule ^kategorien/([0-9]*)/unterkategorien/([0-9]*) ?task=unterkategorien&kat_id=$1&ukat_id=$2 [L]
+RewriteRule ^kategorien/([0-9]*)   ?task=kategorien&kat_id=$1 [L]
+RewriteRule ^artikelview/([0-9]*)   ?task=artikelview&art_id=$1 [L]
+
+RewriteRule ^unterkategorien_verwaltung$   ?task=unterkategorien_verwaltung [L]
+RewriteRule ^userliste/add$   ?task=userliste&act=add [L]
+RewriteRule ^userliste$   ?task=userliste [L]
+
+RewriteRule ^vertrag/arbeits_vertrag/anstell_vertrag_volontar$   ?task=anstell_vertrag_volontar [L]
+RewriteRule ^vertrag/arbeits_vertrag/anstell_vertrag_verlangerung$   ?task=anstell_vertrag_verlangerung [L]
+RewriteRule ^vertrag/arbeits_vertrag/anstell_vertrag_ad_befristet$   ?task=anstell_vertrag_ad_befristet [L]
+RewriteRule ^vertrag/arbeits_vertrag/anstell_vertrag_befristet$   ?task=anstell_vertrag_befristet [L]
+RewriteRule ^vertrag/arbeits_vertrag/anstell_vertrag_aushilfe$   ?task=anstell_vertrag_aushilfe [L]
+RewriteRule ^vertrag/arbeits_vertrag/anstell_vertrag_ad$   ?task=anstell_vertrag_ad [L]
+RewriteRule ^vertrag/arbeits_vertrag/anstell_vertrag_allgemein$   ?task=anstell_vertrag_allgemein [L]
+RewriteRule ^vertrag/arbeits_vertrag/dienstfahrzeug_vertrag$   ?task=dienstfahrzeug_vertrag [L]
+RewriteRule ^vertrag/arbeits_vertrag$   ?task=arbeits_vertrag [L]
+
+RewriteRule ^vertrag/darlehen_sicherung/darlehen$   ?task=darlehen [L]
+RewriteRule ^vertrag/darlehen_sicherung/sicherung$   ?task=sicherung [L]
+RewriteRule ^vertrag/darlehen_sicherung/burgschafts_erkl$   ?task=burgschafts_erkl [L]
+RewriteRule ^vertrag/darlehen_sicherung$   ?task=darlehen_sicherung [L]
+RewriteRule ^vertrag/lohn/lohnherstellungsvertrag$   ?task=lohnherstellungsvertrag [L] 
+
+RewriteRule ^vertrag$   ?task=vertrag [L]
+
+RewriteRule ^formulare/alarmplan$   ?task=alarmplan [L]
+RewriteRule ^formulare/betriebsanweisung_betrieb_verkehr$   ?task=betriebsanweisung_betrieb_verkehr [L]
+RewriteRule ^formulare/betriebsanweisung$   ?task=betriebsanweisung [L]
+RewriteRule ^formulare/nicht_wieterbeschaftigung_nach_ausbildung$   ?task=nicht_wieterbeschaftigung_nach_ausbildung [L]
+RewriteRule ^formulare/quittung$   ?task=quittung [L]
+RewriteRule ^formulare/fahrschein_erlaubnis$   ?task=fahrschein_erlaubnis [L]
+RewriteRule ^formulare_downloads$   formulare_downloads/pruefliste_fuer_fahrzeugfuehrer.doc [L]
+RewriteRule ^formulare$   ?task=formulare [L]
+
+RewriteRule ^vertrag_arbeitsnehmer$   ?task=vertrag_arbeitsnehmer [L]
+
+RewriteRule ^impressum$   ?task=impressum [L]
+RewriteRule ^agb$   ?task=agb [L]
+RewriteRule ^kontakt$   ?task=kontakt [L]
+RewriteRule ^vortrag$   ?task=vortrag [L]
+
+
+RewriteRule ^arbeitsmodule/kundigung-wohnraum$   ?task=kundigung_wohnraum [L]
+RewriteRule ^arbeitsmodule/kundigung$   ?task=kundigung [L] 
+RewriteRule ^arbeitsmodule/abmahnung$   ?task=abmahnung [L]
+RewriteRule ^arbeitsmodule/zeugnis$   ?task=zeugnis [L]
+RewriteRule ^arbeitsmodule$   ?task=arbeitsmodule [L]
+
+
+RewriteRule ^rechnermodul/allgemein/prozesskosten$   ?task=allgemein&rechner=prozesskosten [L]
+RewriteRule ^rechnermodul/arbeitsrecht/arb_geb_kund$   ?task=arbeitsrecht&rechner=arb_geb_kund [L]
+RewriteRule ^rechnermodul/arbeitsrecht/mutterschutz$   ?task=arbeitsrecht&rechner=mutterschutz [L] 
+RewriteRule ^rechnermodul/mietrecht/vermieter_kund$   ?task=mietrecht&rechner=vermieter_kund [L]
+RewriteRule ^rechnermodul/verkehrsrecht/geschwindigkeit$   ?task=verkehrsrecht&rechner=geschwindigkeit [L]
+RewriteRule ^rechnermodul/verkehrsrecht/abstand$   ?task=verkehrsrecht&rechner=abstand [L]
+RewriteRule ^rechnermodul$   ?task=rechnermodul [L]
+
+
+RewriteRule ^kategorien$   ?task=kategorien [L]
+RewriteRule ^eigene_daten$   ?task=eigene_daten [L]
+
+RewriteRule ^prozesskosten$   ?task=prozesskosten [L]
+RewriteRule ^bussgeldrechner$   ?task=bussgeldrechner [L]
+
+RewriteRule ^artikeladmin$   ?task=artikeladmin [L]
+
+RewriteRule ^login$   ?task=login [L]
+RewriteRule ^new_pass$   ?task=new_pass [L]
+RewriteRule ^artikel$   ?task=artikel [L]
+
+
+RewriteRule ^logout$   ?task=logout [L]
