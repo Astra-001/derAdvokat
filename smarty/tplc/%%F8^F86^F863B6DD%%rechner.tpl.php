@@ -1,7 +1,7 @@
 <?php /* Smarty version 2.6.18, created on 2014-07-19 08:15:17
          compiled from /var/customers/webs/strauchyve/derAdvokat/tpl/rechner.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'number_format', '/var/customers/webs/strauchyve/derAdvokat/tpl/rechner.tpl', 101, false),)), $this); ?>
+smarty_core_load_plugins(['plugins' => [['modifier', 'number_format', '/var/customers/webs/strauchyve/derAdvokat/tpl/rechner.tpl', 101, false]]], $this); ?>
 <?php if (strlen ( $this->_tpl_vars['mutterschutz'] )): ?>
 
 <!--MUTTERSCHUTZURLAUB-->

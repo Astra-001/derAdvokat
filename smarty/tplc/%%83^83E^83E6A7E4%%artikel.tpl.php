@@ -1,7 +1,7 @@
 <?php /* Smarty version 2.6.18, created on 2014-09-19 10:22:03
          compiled from /var/customers/webs/strauchyve/derAdvokat/tpl/artikel.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'escape', '/var/customers/webs/strauchyve/derAdvokat/tpl/artikel.tpl', 29, false),)), $this); ?>
+smarty_core_load_plugins(['plugins' => [['modifier', 'escape', '/var/customers/webs/strauchyve/derAdvokat/tpl/artikel.tpl', 29, false]]], $this); ?>
 <h1><?php if (isset ( $_REQUEST['art_id'] )): ?>Artikel bearbeiten<?php else: ?>Neuer Artikel<?php endif; ?></h1>
 <?php echo '
 <script type="text/javascript">
@@ -59,7 +59,7 @@ tinyMCE.init({
 <tr>
 	<td>Kategorien</td>
 	<td><select name="kategorie">
-	<?php $_from = $this->_tpl_vars['kategorie']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }$this->_foreach['kategorie'] = array('total' => count($_from), 'iteration' => 0);
+	<?php $_from = $this->_tpl_vars['kategorie']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }$this->_foreach['kategorie'] = ['total' => is_countable($_from) ? count($_from) : 0, 'iteration' => 0];
 if ($this->_foreach['kategorie']['total'] > 0):
     foreach ($_from as $this->_tpl_vars['k']):
         $this->_foreach['kategorie']['iteration']++;
@@ -73,7 +73,7 @@ if ($this->_foreach['kategorie']['total'] > 0):
 <tr>
 	<td>Unterkategorien</td>
 	<td><select name="unterkategorie">
-	<?php $_from = $this->_tpl_vars['unterkategorie']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }$this->_foreach['unterkategorie'] = array('total' => count($_from), 'iteration' => 0);
+	<?php $_from = $this->_tpl_vars['unterkategorie']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }$this->_foreach['unterkategorie'] = ['total' => is_countable($_from) ? count($_from) : 0, 'iteration' => 0];
 if ($this->_foreach['unterkategorie']['total'] > 0):
     foreach ($_from as $this->_tpl_vars['uk']):
         $this->_foreach['unterkategorie']['iteration']++;

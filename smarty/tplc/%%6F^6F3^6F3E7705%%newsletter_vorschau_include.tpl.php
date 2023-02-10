@@ -1,6 +1,6 @@
 <?php /* Smarty version 2.6.18, created on 2019-02-08 16:01:31
          compiled from /var/customers/webs/strauchyve/derAdvokat/tpl/newsletter_vorschau_include.tpl */ ?>
-<?php $_from = $this->_tpl_vars['newsletter_vorschau']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }$this->_foreach['newsletter_vorschau'] = array('total' => count($_from), 'iteration' => 0);
+<?php $_from = $this->_tpl_vars['newsletter_vorschau']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }$this->_foreach['newsletter_vorschau'] = ['total' => is_countable($_from) ? count($_from) : 0, 'iteration' => 0];
 if ($this->_foreach['newsletter_vorschau']['total'] > 0):
     foreach ($_from as $this->_tpl_vars['nv']):
         $this->_foreach['newsletter_vorschau']['iteration']++;
@@ -46,7 +46,7 @@ if ($this->_foreach['newsletter_vorschau']['total'] > 0):
 	<td bgcolor="#0A264E"><font color="white"><b>Diese<?php if ($this->_tpl_vars['anz_artikeln'] == 1): ?>r<?php endif; ?> Artikel k&ouml;nnte<?php if ($this->_tpl_vars['anz_artikeln'] >= 2): ?>n<?php endif; ?> Sie auch interessieren:</b></font></td>
 </tr>
 <?php endif; ?>
-	<?php $_from = $this->_tpl_vars['newsletter_artikeln_id']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }$this->_foreach['newsletter_artikeln_id'] = array('total' => count($_from), 'iteration' => 0);
+	<?php $_from = $this->_tpl_vars['newsletter_artikeln_id']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }$this->_foreach['newsletter_artikeln_id'] = ['total' => is_countable($_from) ? count($_from) : 0, 'iteration' => 0];
 if ($this->_foreach['newsletter_artikeln_id']['total'] > 0):
     foreach ($_from as $this->_tpl_vars['na']):
         $this->_foreach['newsletter_artikeln_id']['iteration']++;

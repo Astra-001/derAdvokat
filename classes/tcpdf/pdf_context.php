@@ -24,18 +24,18 @@ class pdf_context {
      *
      * @var integer 0 = file | 1 = string
      */
-    var $_mode = 0;
+    public $_mode = 0;
     
-	var $file;
-	var $buffer;
-	var $offset;
-	var $length;
+	public $file;
+	public $buffer;
+	public $offset;
+	public $length;
 
-	var $stack;
+	public $stack;
 
 	// Constructor
 
-	function pdf_context(&$f) {
+	function __construct(&$f) {
 		$this->file =& $f;
 		if (is_string($this->file))
 		    $this->_mode = 1;
@@ -61,7 +61,7 @@ class pdf_context {
 	        $this->length = strlen($this->buffer);
 	    }
 		$this->offset = 0;
-		$this->stack = array();
+		$this->stack = [];
 	}
 
 	// Make sure that there is at least one

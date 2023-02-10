@@ -52,7 +52,7 @@ $rtf->setMargins(2, 2, 2 , 2);
 $sect = &$rtf->addSection();
 $fontGrey = new Font(12, 'dejavusans', '#474747');
 $fontTitle = new Font(12, 'dejavusans', '#000000');
-$fontTitle->setBold(1);
+$fontTitle->setBold();
 $fontPar = new Font(12, 'dejavusans', '#000000');
 //$fontPar->setBold(1);
 $parPar = new ParFormat();

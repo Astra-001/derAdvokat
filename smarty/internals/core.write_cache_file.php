@@ -43,7 +43,7 @@ function smarty_core_write_cache_file($params, &$smarty)
         
         $level = 0;
         $j = 0;
-        for ($i=0, $results_count = count($results); $i < $results_count && $j < $match_count; $i++) {
+        for ($i=0, $results_count = is_countable($results) ? count($results) : 0; $i < $results_count && $j < $match_count; $i++) {
             if ($results[$i] == $match[0][$j]) {
                 // nocache tag
                 if ($match[1][$j]) { // closing tag
@@ -68,7 +68,7 @@ function smarty_core_write_cache_file($params, &$smarty)
     if (!empty($smarty->cache_handler_func)) {
         // use cache_handler function
         call_user_func_array($smarty->cache_handler_func,
-                             array('write', &$smarty, &$params['results'], $params['tpl_file'], $params['cache_id'], $params['compile_id'], null));
+                             ['write', &$smarty, &$params['results'], $params['tpl_file'], $params['cache_id'], $params['compile_id'], null]);
     } else {
         // use local cache file
 
@@ -84,7 +84,7 @@ function smarty_core_write_cache_file($params, &$smarty)
 
         $_auto_id = $smarty->_get_auto_id($params['cache_id'], $params['compile_id']);
         $_cache_file = $smarty->_get_auto_filename($smarty->cache_dir, $params['tpl_file'], $_auto_id);
-        $_params = array('filename' => $_cache_file, 'contents' => $params['results'], 'create_dirs' => true);
+        $_params = ['filename' => $_cache_file, 'contents' => $params['results'], 'create_dirs' => true];
         require_once(SMARTY_CORE_DIR . 'core.write_file.php');
         smarty_core_write_file($_params, $smarty);
         return true;

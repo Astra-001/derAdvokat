@@ -8,23 +8,23 @@
 class mysqlField
 {
 	/** @var string Feldname */
-	var $name;
+	public $name;
 	/** @var string Feldtyp */
-	var $type;
+	public $type;
 	/** @var string Null erlaubt */
-	var $null;
+	public $null;
 	/** @var string Schlüssel */
-	var $key;
+	public $key;
 	/** @var string Standardwert */
-	var $default;
+	public $default;
 	/** @var string Extra */
-	var $extra;
+	public $extra;
 	/** @var string Feldwert */
-	var $value;
+	public $value;
 	/** @var float Feldlänge */
-	var $length;
+	public $length;
 	/** @var string Typ des Feldwerts */
-	var $valueType;
+	public $valueType;
 
 	/**
 	* Nimmt ein Array mit allen relevaten Feldwerten entgegen und setzt die Eigenschaften.
@@ -36,11 +36,11 @@ class mysqlField
 		$this->name = $field[0];
 		$this->type = $field[1];
 		$this->null = $field[2];
-		$this->key = $field[3];
+		$this->key =  $field[3];
 		$this->default = $field[4];
 		$this->extra = $field[5];
 
-		if(isset($field[6]))
+		if( isset($field[6]) )
 			$this->length = $field[6];
 
 		$this->setDefaultValue();
@@ -64,7 +64,7 @@ class mysqlField
 	* @param string $type Typ des Wertes. Für MySQL Funktionen ist 'FUNC' zu übergeben
 	* @return bool Erfolg
 	*/
-	function setValue($value, $type = '')
+	function setValue(mixed $value, $type = '')
 	{
 		$value = trim(stripslashes($value));
 

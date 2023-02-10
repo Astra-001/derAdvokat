@@ -52,9 +52,9 @@
 <tr>
 	<td>Empf&auml;ngerart<br/>(legen Sie fest... Als Empf&auml;nger,<br/> zu welcher Gruppe geh&ouml;rt diese Person?)</td>
 	<td colspan="3"><select name="empf_art"">
-        <option value="1" <?php if ($_GET['act'] == edit && $this->_tpl_vars['user']['empfanger_art'] == 1): ?> selected="selected" <?php endif; ?>>Sonstige</option>
-        <option value="2" <?php if ($_GET['act'] == edit && $this->_tpl_vars['user']['empfanger_art'] == 2): ?> selected="selected" <?php endif; ?>>Kosmetikhersteller</option>
-        <option value="3" <?php if ($_GET['act'] == edit && $this->_tpl_vars['user']['empfanger_art'] == 3): ?> selected="selected" <?php endif; ?>>Vermieter</option>
+        <option value="1" <?php if ($_GET['act'] == \EDIT && $this->_tpl_vars['user']['empfanger_art'] == 1): ?> selected="selected" <?php endif; ?>>Sonstige</option>
+        <option value="2" <?php if ($_GET['act'] == \EDIT && $this->_tpl_vars['user']['empfanger_art'] == 2): ?> selected="selected" <?php endif; ?>>Kosmetikhersteller</option>
+        <option value="3" <?php if ($_GET['act'] == \EDIT && $this->_tpl_vars['user']['empfanger_art'] == 3): ?> selected="selected" <?php endif; ?>>Vermieter</option>
     </select></td>
 </tr>
 <tr>

@@ -33,7 +33,7 @@
 	<th>Aktion</th>
 </tr>
 
-<?php $_from = $this->_tpl_vars['newsletter']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }$this->_foreach['newsletter'] = array('total' => count($_from), 'iteration' => 0);
+<?php $_from = $this->_tpl_vars['newsletter']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }$this->_foreach['newsletter'] = ['total' => is_countable($_from) ? count($_from) : 0, 'iteration' => 0];
 if ($this->_foreach['newsletter']['total'] > 0):
     foreach ($_from as $this->_tpl_vars['nl']):
         $this->_foreach['newsletter']['iteration']++;

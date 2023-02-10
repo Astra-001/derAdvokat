@@ -55,8 +55,14 @@
  * @param string $enc Name of the encoding table to use. Omit this parameter for TrueType Unicode, OpenType Unicode and symbolic fonts like Symbol or ZapfDingBats.
  * @param array $patch Optional modification of the encoding
  */
-function MakeFont($fontfile, $fmfile, $embedded=true, $enc='cp1252', $patch=array()) {
-	//Generate a font definition file
+function MakeFont($fontfile, $fmfile, $embedded=true, $enc='cp1252', $patch=[]) {
+	$size1 = null;
+ $size2 = null;
+ $widths = [];
+ $type = null;
+ $fm = [];
+ $fd = null;
+ //Generate a font definition file
 	set_magic_quotes_runtime(0);
 	ini_set('auto_detect_line_endings', '1');
 	if (!file_exists($fontfile)) {
@@ -66,7 +72,7 @@ function MakeFont($fontfile, $fmfile, $embedded=true, $enc='cp1252', $patch=arra
 		die('Error: file not found: '.$fmfile);
 	}
 	$cidtogidmap = '';
-	$map = array();
+	$map = [];
 	$diff = '';
 	$dw = 0; // default width
 	$ffext = strtolower(substr($fontfile, -3));
@@ -144,7 +150,7 @@ function MakeFont($fontfile, $fmfile, $embedded=true, $enc='cp1252', $patch=arra
 		fclose($f);
 		if ($type == 'Type1') {
 			//Find first two sections and discard third one
-			$header = (ord($file{0}) == 128);
+			$header = (ord($file[0]) == 128);
 			if ($header) {
 				//Strip first binary header
 				$file = substr($file, 6);
@@ -154,7 +160,7 @@ function MakeFont($fontfile, $fmfile, $embedded=true, $enc='cp1252', $patch=arra
 				die('Error: font file does not seem to be valid Type1');
 			}
 			$size1 = $pos + 6;
-			if ($header AND (ord($file{$size1}) == 128)) {
+			if ($header AND (ord($file[$size1]) == 128)) {
 				//Strip second binary header
 				$file = substr($file, 0, $size1).substr($file, $size1+6);
 			}
@@ -210,14 +216,14 @@ function MakeFont($fontfile, $fmfile, $embedded=true, $enc='cp1252', $patch=arra
  */
 function ReadMap($enc) {
 	//Read a map file
-	$file = dirname(__FILE__).'/enc/'.strtolower($enc).'.map';
+	$file = __DIR__.'/enc/'.strtolower($enc).'.map';
 	$a = file($file);
 	if (empty($a)) {
 		die('Error: encoding not found: '.$enc);
 	}
-	$cc2gn = array();
+	$cc2gn = [];
 	foreach ($a as $l) {
-		if ($l{0} == '!') {
+		if ($l[0] == '!') {
 			$e = preg_split('/[ \\t]+/',rtrim($l));
 			$cc = hexdec(substr($e[0],1));
 			$gn = $e[2];
@@ -243,8 +249,8 @@ function ReadUFM($file, &$cidtogidmap) {
 	if (empty($a)) {
 		die('File not found');
 	}
-	$widths = array();
-	$fm = array();
+	$widths = [];
+	$fm = [];
 	foreach($a as $l) {
 		$e = explode(' ',chop($l));
 		if(count($e) < 2) {
@@ -266,8 +272,8 @@ function ReadUFM($file, &$cidtogidmap) {
 			}
 			// Set GID
 			if (($cc >= 0) AND ($cc < 0xFFFF) AND $glyph) {
-				$cidtogidmap{($cc * 2)} = chr($glyph >> 8);
-				$cidtogidmap{(($cc * 2) + 1)} = chr($glyph & 0xFF);
+				$cidtogidmap[$cc * 2] = chr($glyph >> 8);
+				$cidtogidmap[($cc * 2) + 1] = chr($glyph & 0xFF);
 			}
 		}
 		if(($gn == '.notdef') AND (!isset($fm['MissingWidth']))) {
@@ -290,7 +296,7 @@ function ReadUFM($file, &$cidtogidmap) {
 		} elseif($code == 'IsFixedPitch') {
 			$fm['IsFixedPitch'] = ($param == 'true');
 		} elseif($code == 'FontBBox') {
-			$fm['FontBBox'] = array($e[1], $e[2], $e[3], $e[4]);
+			$fm['FontBBox'] = [$e[1], $e[2], $e[3], $e[4]];
 		} elseif($code == 'CapHeight') {
 			$fm['CapHeight'] = (int)$param;
 		} elseif($code == 'StdVW') {
@@ -316,43 +322,9 @@ function ReadAFM($file,&$map) {
 	if(empty($a)) {
 		die('File not found');
 	}
-	$widths = array();
-	$fm = array();
-	$fix = array(
-		'Edot'=>'Edotaccent',
-		'edot'=>'edotaccent',
-		'Idot'=>'Idotaccent',
-		'Zdot'=>'Zdotaccent',
-		'zdot'=>'zdotaccent',
-		'Odblacute' => 'Ohungarumlaut',
-		'odblacute' => 'ohungarumlaut',
-		'Udblacute'=>'Uhungarumlaut',
-		'udblacute'=>'uhungarumlaut',
-		'Gcedilla'=>'Gcommaaccent'
-		,'gcedilla'=>'gcommaaccent',
-		'Kcedilla'=>'Kcommaaccent',
-		'kcedilla'=>'kcommaaccent',
-		'Lcedilla'=>'Lcommaaccent',
-		'lcedilla'=>'lcommaaccent',
-		'Ncedilla'=>'Ncommaaccent',
-		'ncedilla'=>'ncommaaccent',
-		'Rcedilla'=>'Rcommaaccent',
-		'rcedilla'=>'rcommaaccent',
-		'Scedilla'=>'Scommaaccent',
-		'scedilla'=>'scommaaccent',
-		'Tcedilla'=>'Tcommaaccent',
-		'tcedilla'=>'tcommaaccent',
-		'Dslash'=>'Dcroat',
-		'dslash'=>'dcroat',
-		'Dmacron'=>'Dcroat',
-		'dmacron'=>'dcroat',
-		'combininggraveaccent'=>'gravecomb',
-		'combininghookabove'=>'hookabovecomb',
-		'combiningtildeaccent'=>'tildecomb',
-		'combiningacuteaccent'=>'acutecomb',
-		'combiningdotbelow'=>'dotbelowcomb',
-		'dongsign'=>'dong'
-		);
+	$widths = [];
+	$fm = [];
+	$fix = ['Edot'=>'Edotaccent', 'edot'=>'edotaccent', 'Idot'=>'Idotaccent', 'Zdot'=>'Zdotaccent', 'zdot'=>'zdotaccent', 'Odblacute' => 'Ohungarumlaut', 'odblacute' => 'ohungarumlaut', 'Udblacute'=>'Uhungarumlaut', 'udblacute'=>'uhungarumlaut', 'Gcedilla'=>'Gcommaaccent', 'gcedilla'=>'gcommaaccent', 'Kcedilla'=>'Kcommaaccent', 'kcedilla'=>'kcommaaccent', 'Lcedilla'=>'Lcommaaccent', 'lcedilla'=>'lcommaaccent', 'Ncedilla'=>'Ncommaaccent', 'ncedilla'=>'ncommaaccent', 'Rcedilla'=>'Rcommaaccent', 'rcedilla'=>'rcommaaccent', 'Scedilla'=>'Scommaaccent', 'scedilla'=>'scommaaccent', 'Tcedilla'=>'Tcommaaccent', 'tcedilla'=>'tcommaaccent', 'Dslash'=>'Dcroat', 'dslash'=>'dcroat', 'Dmacron'=>'Dcroat', 'dmacron'=>'dcroat', 'combininggraveaccent'=>'gravecomb', 'combininghookabove'=>'hookabovecomb', 'combiningtildeaccent'=>'tildecomb', 'combiningacuteaccent'=>'acutecomb', 'combiningdotbelow'=>'dotbelowcomb', 'dongsign'=>'dong'];
 	foreach($a as $l) {
 		$e = explode(' ', rtrim($l));
 		if (count($e) < 2) {
@@ -365,7 +337,7 @@ function ReadAFM($file,&$map) {
 			$cc = (int)$e[1];
 			$w = $e[4];
 			$gn = $e[7];
-			if (substr($gn, -4) == '20AC') {
+			if (str_ends_with($gn, '20AC')) {
 				$gn = 'Euro';
 			}
 			if (isset($fix[$gn])) {
@@ -405,7 +377,7 @@ function ReadAFM($file,&$map) {
 		} elseif($code == 'IsFixedPitch') {
 			$fm['IsFixedPitch'] = ($param == 'true');
 		} elseif($code == 'FontBBox') {
-			$fm['FontBBox'] = array($e[1], $e[2], $e[3], $e[4]);
+			$fm['FontBBox'] = [$e[1], $e[2], $e[3], $e[4]];
 		} elseif($code == 'CapHeight') {
 			$fm['CapHeight'] = (int)$param;
 		} elseif($code == 'StdVW') {
@@ -438,10 +410,10 @@ function ReadAFM($file,&$map) {
 
 function MakeFontDescriptor($fm, $symbolic=false) {
 	//Ascent
-	$asc = (isset($fm['Ascender']) ? $fm['Ascender'] : 1000);
+	$asc = ($fm['Ascender'] ?? 1000);
 	$fd = "array('Ascent'=>".$asc;
 	//Descent
-	$desc = (isset($fm['Descender']) ? $fm['Descender'] : -200);
+	$desc = ($fm['Descender'] ?? -200);
 	$fd .= ",'Descent'=>".$desc;
 	//CapHeight
 	if (isset($fm['CapHeight'])) {
@@ -470,16 +442,16 @@ function MakeFontDescriptor($fm, $symbolic=false) {
 	if (isset($fm['FontBBox'])) {
 		$fbb = $fm['FontBBox'];
 	} else {
-		$fbb = array(0, ($desc - 100), 1000, ($asc + 100));
+		$fbb = [0, ($desc - 100), 1000, ($asc + 100)];
 	}
 	$fd .= ",'FontBBox'=>'[".$fbb[0].' '.$fbb[1].' '.$fbb[2].' '.$fbb[3]."]'";
 	//ItalicAngle
-	$ia = (isset($fm['ItalicAngle']) ? $fm['ItalicAngle'] : 0);
+	$ia = ($fm['ItalicAngle'] ?? 0);
 	$fd .= ",'ItalicAngle'=>".$ia;
 	//StemV
 	if (isset($fm['StdVW'])) {
 		$stemv = $fm['StdVW'];
-	} elseif (isset($fm['Weight']) and eregi('(bold|black)', $fm['Weight'])) {
+	} elseif (isset($fm['Weight']) and preg_match('#(bold|black)#mi', $fm['Weight'])) {
 		$stemv = 120;
 	} else {
 		$stemv = 70;
@@ -497,7 +469,7 @@ function MakeWidthArray($fm) {
 	//Make character width array
 	$s = 'array(';
 	$cw = $fm['Widths'];
-	$els = array();
+	$els = [];
 	$c = 0;
 	foreach ($cw as $i => $w) {
 		if (is_numeric($i)) {
@@ -584,7 +556,7 @@ function CheckTTF($file) {
 }
 
 $arg = $GLOBALS['argv'];
-if (count($arg) >= 3) {
+if ((is_countable($arg) ? count($arg) : 0) >= 3) {
 	ob_start();
 	array_shift($arg);
 	if (sizeof($arg) == 3) {
@@ -599,7 +571,7 @@ if (count($arg) >= 3) {
 		}
 	}
 	if (!isset($arg[4])) {
-		$arg[4] = array();
+		$arg[4] = [];
 	}
 	MakeFont($arg[0], $arg[1], $arg[2], $arg[3], $arg[4]);
 	$t = ob_get_clean();

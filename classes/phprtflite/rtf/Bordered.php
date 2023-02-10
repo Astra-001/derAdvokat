@@ -28,13 +28,13 @@ class Bordered {
     /**#@+ 
 	 * @access private
 	 */ 
-  	var $borderLeft;
+  	public $borderLeft;
 	
-	var $borderRight;
+	public $borderRight;
 	
-	var $borderTop;
+	public $borderTop;
 	
-	var $borderBottom;	
+	public $borderBottom;	
 	/**#@-*/  
 	
     	

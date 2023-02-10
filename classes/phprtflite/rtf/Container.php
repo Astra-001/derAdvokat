@@ -31,16 +31,16 @@ class Container {
 	 * Internal use.
 	 * @access public
 	 */ 
-    var $rtf;
+    public $rtf;
   	  	
-  	var $elements = array();  
+  	public $elements = [];  
   	
-  	var $pard = '\pard ';
+  	public $pard = '\pard ';
   	
-  	var $emptyPar = false;
+  	public $emptyPar = false;
   	/**#@-*/
 	   	
-  	function Container(&$rtf) {	    
+  	function __construct(&$rtf) {	    
 	    $this->rtf = &$rtf;	
 	}
     
@@ -124,7 +124,7 @@ class Container {
 			//$text = preg_replace("/<SECT[ ]*(\/)?[ ]*>/mi", "\\sect", $text);	
 		}	
 					
-		$text = Util::utf8Unicode($text);		
+		$text = (new Util())->utf8Unicode($text);		
 		//content formating
 		$content = (is_a($parFormat, 'ParFormat') && count($this->elements) != 0 && empty($this->emptyPar)) ? '\par ' : '';	
 		$this->emptyPar = false;  	

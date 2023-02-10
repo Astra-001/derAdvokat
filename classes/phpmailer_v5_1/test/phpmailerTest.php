@@ -30,28 +30,28 @@ class phpmailerTest extends PHPUnit_Framework_TestCase {
      * @private
      * @type object
      */
-    var $Mail = false;
+    public $Mail = false;
 
     /**
      * Holds the SMTP mail host.
      * @public
      * @type string
      */
-    var $Host = "";
+    public $Host = "";
     
     /**
      * Holds the change log.
      * @private
      * @type string array
      */
-    var $ChangeLog = array();
+    public $ChangeLog = [];
     
      /**
      * Holds the note log.
      * @private
      * @type string array
      */
-    var $NoteLog = array();   
+    public $NoteLog = [];   
 
     /**
      * Run before each test is started.
@@ -112,8 +112,8 @@ class phpmailerTest extends PHPUnit_Framework_TestCase {
     function tearDown() {
         // Clean global variables
         $this->Mail = NULL;
-        $this->ChangeLog = array();
-        $this->NoteLog = array();
+        $this->ChangeLog = [];
+        $this->NoteLog = [];
     }
 
 
@@ -154,7 +154,7 @@ class phpmailerTest extends PHPUnit_Framework_TestCase {
         
         // If attachments then create an attachment list
         $attachments = $this->Mail->GetAttachments();
-        if(count($attachments) > 0)
+        if((is_countable($attachments) ? count($attachments) : 0) > 0)
         {
             $ReportBody .= "Attachments:" . $eol;
             $ReportBody .= $bullet_start;
@@ -588,11 +588,11 @@ class phpmailerTest extends PHPUnit_Framework_TestCase {
 		$definedStrings = $this->Mail->GetTranslations();
 		foreach (new DirectoryIterator('../language') as $fileInfo) {
 			if($fileInfo->isDot()) continue;
-			$matches = array();
+			$matches = [];
 			//Only look at language files, ignore anything else in there
 			if (preg_match('/^phpmailer\.lang-([a-z_]{2,})\.php$/', $fileInfo->getFilename(), $matches)) {
 				$lang = $matches[1]; //Extract language code
-				$PHPMAILER_LANG = array(); //Language strings get put in here
+				$PHPMAILER_LANG = []; //Language strings get put in here
 				include $fileInfo->getPathname(); //Get language strings
 				$missing = array_diff(array_keys($definedStrings), array_keys($PHPMAILER_LANG));
 				$extra = array_diff(array_keys($PHPMAILER_LANG), array_keys($definedStrings));

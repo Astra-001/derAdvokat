@@ -179,8 +179,8 @@
     <h3>Verwandten</h3> <a onclick="addverw();">Verwandten [+]</a>
     <div id="verwandten">
 
-    <?php if (count ( $_POST['verwand'] )): ?>
-        <?php $_from = $_POST['verwand']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+    <?php if (is_countable($_POST['verwand']) ? count ( $_POST['verwand'] ) : 0): ?>
+        <?php $_from = $_POST['verwand']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (is_countable($_from) ? count($_from) : 0):
     foreach ($_from as $this->_tpl_vars['key'] => $this->_tpl_vars['item']):
 ?>
 
@@ -194,7 +194,7 @@
 ')" style="color: red;">L&ouml;schen</a>
                 <table  cellpadding="0" cellspacing="0">
                     <tr>
-                    <td width="170" align="left">Anrede</td><td align="left"><select name="verwand[]"><option value="1" <?php if (item == 1): ?>selected<?php endif; ?>>Herr</option><option value="2" <?php if (item == 2): ?>selected<?php endif; ?>>Frau</option></select><br /><br /></td>
+                    <td width="170" align="left">Anrede</td><td align="left"><select name="verwand[]"><option value="1" <?php if (\ITEM == 1): ?>selected<?php endif; ?>>Herr</option><option value="2" <?php if (\ITEM == 2): ?>selected<?php endif; ?>>Frau</option></select><br /><br /></td>
                     </tr>
                     <tr>
                     <td width="170" align="left">Name</td><td align="left"><input class="inputbox" type="text" name="verwname[]"  style="width:340px;" value="<?php echo $_POST['verwname'][$this->_tpl_vars['key']]; ?>

@@ -1,10 +1,10 @@
 <?php /* Smarty version 2.6.18, created on 2016-02-16 19:14:54
          compiled from /var/customers/webs/strauchyve/derAdvokat/tpl/artikelliste.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'date_format', '/var/customers/webs/strauchyve/derAdvokat/tpl/artikelliste.tpl', 20, false),)), $this); ?>
+smarty_core_load_plugins(['plugins' => [['modifier', 'date_format', '/var/customers/webs/strauchyve/derAdvokat/tpl/artikelliste.tpl', 20, false]]], $this); ?>
 <h1>Artikelübersicht</h1>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
-$this->_smarty_include(array('smarty_include_tpl_file' => (@SMARTY_TEMPLATE_DIR)."seiten_incl.tpl", 'smarty_include_vars' => array()));
+$this->_smarty_include(['smarty_include_tpl_file' => (@SMARTY_TEMPLATE_DIR)."seiten_incl.tpl", 'smarty_include_vars' => []]);
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
@@ -19,7 +19,7 @@ unset($_smarty_tpl_vars);
     <th>Erstellt.</th>
     <th>Aktion</th>
 </tr>
-<?php $_from = $this->_tpl_vars['artikel']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }$this->_foreach['artikel'] = array('total' => count($_from), 'iteration' => 0);
+<?php $_from = $this->_tpl_vars['artikel']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }$this->_foreach['artikel'] = ['total' => is_countable($_from) ? count($_from) : 0, 'iteration' => 0];
 if ($this->_foreach['artikel']['total'] > 0):
     foreach ($_from as $this->_tpl_vars['a']):
         $this->_foreach['artikel']['iteration']++;
@@ -54,7 +54,7 @@ if ($this->_foreach['artikel']['total'] > 0):
 </table>
 <br/><br/>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
-$this->_smarty_include(array('smarty_include_tpl_file' => (@SMARTY_TEMPLATE_DIR)."seiten_incl.tpl", 'smarty_include_vars' => array()));
+$this->_smarty_include(['smarty_include_tpl_file' => (@SMARTY_TEMPLATE_DIR)."seiten_incl.tpl", 'smarty_include_vars' => []]);
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>

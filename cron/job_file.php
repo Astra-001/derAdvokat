@@ -50,7 +50,7 @@ $newsletterArtiklel->setWhere('`parent_id`='.$job->newsletter_id->getValue());
 $newsletterArtiklel->select();
 $nlArtikel = $newsletterArtiklel->getRecords();     
 
-$artikelIds = array();
+$artikelIds = [];
 foreach ($nlArtikel as $temp) {
     array_push($artikelIds, $temp['artikel_id']);
 }

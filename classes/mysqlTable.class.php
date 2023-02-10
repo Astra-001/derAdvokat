@@ -11,44 +11,43 @@ class mysqlTable
 	* @var object Datenbankverbindung
 	* @link database
 	*/
-	var $connection;
+	public $database;
+	public $table;
+	public $connection;
 	/** @var array Tabellenfelder */
-	var $fields;
+	public $fields = [[], []];
 	/** @var string SQL Abfrage */
-	var $sql;
+	public $sql;
 	/** @var string SQL Where Klausel */
-	var $where;
+	public $where;
 	/** @var string SQL Order By Klausel */
-	var $orderBy;
+	public $orderBy;
 	/** @var int SQL Limit Klausel*/
-	var $limit;
+	public $limit;
 	/** @var string SQL Select Funktion */
-	var $selectFunc;
+	public $selectFunc;
 	/** @var string SQL Group By Klausel */
-	var $groupBy;
+	public $groupBy;
 	/** @var string SQL Having Klausel */
-	var $having;
-	/** @var string Datenbank = klofuehrer */
-	var $database;
-	/** @var string Tabelle = toilets */
-	var $table;
+	public $having;
 
 	/** @var array Datensätze */
-	var $records = array();
+	public $records = [];
 	/** @var int Anzahl an Datensätzen */
-	var $countRecords = 0;
+	public $countRecords = 0;
 	/** @var int Ausgewählte Datensätze */
-	var $selectedRecord = 0;
+	public $selectedRecord = 0;
 
-	function __construct($connection, $table, $database = DATABASE)
+	/**
+  * @param string $database
+  * @param string $table
+  */
+ function __construct($connection, $table, $database = DATABASE)
 	{
-		
-		$this->database = $database;
-		$this->table = $table;
-		$this->fields = array(array(),array());
+		$this->database  = $database;
+		$this->table     = $table; 
 		$this->setConnection($connection);
 		$this->connection->sendQuery("SHOW FIELDS FROM `" . $database . "`.`" . $table . "`;");
-		var_dump("SHOW FIELDS FROM `" . $database . "`.`" . $table . "`;");
 		while($field = $this->connection->fetchRow())
 		{
 			if(preg_match('/\(\d*\)/', $field[1], $length, PREG_OFFSET_CAPTURE))
@@ -56,8 +55,9 @@ class mysqlTable
 				$field[0] = substr($length[0][0], 1, strlen($length[0][0]) - 2);
 				$field[1] = preg_replace('/\(\d*\)/', '', $field[1]);
 			}
+			
 			array_push($this->fields[0] ,$field[0]);
-			array_push($this->$field[1], new mysqlField($field));
+			array_push($this->fields[1],  (array) new mysqlField($field));
 		}
 	}
 
@@ -78,7 +78,7 @@ class mysqlTable
 	* @param mixed $record Datensatz
 	* @return boolean Wenn erfolgreich true
 	*/
-	function load($record)
+	function load(mixed $record)
 	{
 		$return = true;
 
@@ -91,6 +91,8 @@ class mysqlTable
 		{
 			if(key($record))
 				foreach($this->fields as $field)
+					print_r( $record );
+					print_r( $field );
 					if(isset($record[$field])) $this->$field->setValue($record[$field]);
 			else
 				foreach($this->fields as $index => $field)
@@ -116,10 +118,9 @@ class mysqlTable
 	*/
 	function select($loadRecord = true, $select = "*")
 	{
-		var_dump( $this->database );
-		var_dump( $this->table );
+	
 		$this->sql = trim("SELECT " . $this->selectFunc . $select . " FROM `" . $this->database . "`.`" . $this->table . "` " . $this->where . $this->groupBy . $this->having . $this->orderBy . $this->limit) . ";";
-		
+
 		if($this->connection->sendQuery($this->sql))
 		{
 			if($loadRecord)
@@ -180,7 +181,8 @@ class mysqlTable
 	*/
 	function getReplacedRecord()
 	{
-		foreach($this->fields as $field)
+		$where = null;
+  foreach($this->fields as $field)
 			if($this->$field->getValue()) $where .= "`" . $field . "`=" . $this->$field->getSQLValue() . " && ";
 
 		$where = substr($where, 0, strlen($where) - 4);

@@ -3,27 +3,25 @@ session_start();
 class reload_check 
 {
     /**
-     * In welchem Array werden die Tokens in der Session gespeichert?
-     * @var        string
-     * @access    private
-     */
-    #private $tokenarray = 'token_array';
-    /**
-     * Wie soll das hidden element heißen?
-     * @var        string
-     * @access    public
-     */
-    #public $tokenname = 'token_check';
-
-    private $_smarty = null;
- 	private $_database = null;
-
-	public function __construct($_smarty,$_database)
-	{
-		$this->_smarty = $_smarty;
-		$this->_database = $_database;
-		
-	}	
+  * @param string $_smarty
+  */
+ public function __construct(
+     /**
+      * In welchem Array werden die Tokens in der Session gespeichert?
+      * @var        string
+      * @access    private
+      */
+     #private $tokenarray = 'token_array';
+     /**
+      * Wie soll das hidden element heißen?
+      * @access    public
+      */
+     #public $tokenname = 'token_check';
+     private $_smarty,
+     private $_database
+ )
+ {
+ }	
     public function get_formtoken(&$_smarty,&$_database) 
     {
         $tok = md5(uniqid("foobarmagic"));

@@ -26,13 +26,11 @@
 class BorderFormat {
   
 	/**#@+ @access private */   
-  	var $size;
+  	public $size;
   	
-  	var $type;
+  	public $color;
   	
-  	var $color;
-  	
-  	var $space;
+  	public $space;
 	/**#@-*/
     
     /**
@@ -43,10 +41,9 @@ class BorderFormat {
      * @param string $color Colour of border (example '#ff0000')
      * @param float $space Space between borders and the paragraph. 
      */
-	function BorderFormat($size = 0, $color = '', $type = '', $space = 0) {	  
+	function __construct($size = 0, $color = '', public $type = '', $space = 0) {	  
 	  	$this->size = $size * SPACE_IN_POINTS;
-		$this->type = $type;
-		$this->color = Util::formatColor($color); 		
+		$this->color = (new Util())->formatColor($color); 		
 		$this->space = round($space * TWIPS_IN_CM);
 	}
 
@@ -65,27 +62,13 @@ class BorderFormat {
      * @return string
      */
 	function getType() {	  
-	  	switch ($this->type) {		    
-		    case 'single':		    
-		    	return '\brdrs';
-		    break;
-		    
-		    case 'dot':		    
-		    	return '\brdrdot';
-		    break;
-		    
-		    case 'dash':		    	
-		    	return '\brdrdash';
-		    break;
-		    
-		    case 'dotdash':		    	
-		    	return '\brdrdashd';
-		    break;
-		    
-		    default:		    	
-		    	return '\brdrs';
-		    break;		    
-		}
+	  	return match ($this->type) {
+        'single' => '\brdrs',
+        'dot' => '\brdrdot',
+        'dash' => '\brdrdash',
+        'dotdash' => '\brdrdashd',
+        default => '\brdrs',
+    };
 	}  	
 
 }

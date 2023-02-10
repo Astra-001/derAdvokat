@@ -59,6 +59,7 @@ try {
 }
 
 function cleanEmails($str,$type) {
+  $addy = [];
   if ($type == 'cc') {
     $addy['Email'] = $str[0];
     $addy['Name']  = $str[1];
@@ -70,7 +71,7 @@ function cleanEmails($str,$type) {
     return $addy;
   }
   $addyArr = explode(' <', $str);
-  if (substr($addyArr[1],-1) == '>') {
+  if (str_ends_with($addyArr[1], '>')) {
     $addyArr[1] = substr($addyArr[1],0,-1);
   }
   $addy['Name']  = $addyArr[0];

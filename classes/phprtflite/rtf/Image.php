@@ -34,25 +34,23 @@ class Image {
 	 * Internal use.
 	 * @access public
 	 */
-  	var $parFormat;
+  	public $parFormat;
 	/**#@-*/
 	
 	/**#@+ @access private*/	    	
-    var $rtf;
-    	    	
-  	var $fileName;
+    public $rtf;
   	
-  	var $fileExtention;
+  	public $fileExtention;
   	
-  	var $defaultWidth;
+  	public $defaultWidth;
   	
-  	var $defaultHeight;
+  	public $defaultHeight;
   	
-  	var $height;
+  	public $height;
   	
-  	var $width;
+  	public $width;
   	
-  	var $bordered;      	
+  	public $bordered;      	
     /**#@-*/
     
 	/**
@@ -64,10 +62,9 @@ class Image {
      * @param flaot $height
      * @access public
      */
-  	function Image(&$rtf, $fileName, &$parFormat, $width = 0, $height = 0) {
+  	function __construct(&$rtf, public $fileName, &$parFormat, $width = 0, $height = 0) {
   	    $this->rtf = &$rtf;
-  	    $this->parFormat = &$parFormat;
-		$this->fileName = $fileName;			
+  	    $this->parFormat = &$parFormat;			
 		$this->fileExtention = strtolower(substr($fileName, -3));	
 		$arr = getimagesize($fileName);	
 

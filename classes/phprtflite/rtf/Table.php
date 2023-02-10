@@ -29,50 +29,39 @@ class Table {
 	 * Internal use.
 	 * @access public
 	 */   
-  	var $rtf;
+  	public $rtf;
   	
-  	var $container;
+  	public $container;
   
-  	var $rows;
+  	public $rows;
   
-  	var $columns;  
+  	public $columns;  
   	
-  	var $cells;
+  	public $cells;
   	
-  	var $alignment;
+  	public $alignment;
   	
-  	var $keep;
+  	public $keep;
   	
-  	var $firstRowHeader;
+  	public $firstRowHeader;
   	
-	var $leftPosition = 0;
+	public $leftPosition = 0;
 	/**#@-*/ 		
 	
 	/** 
 	 * Constructor. Internal use.
 	 * @access public
 	 */
-	function Table(&$container, $alignment = 'left') {	    
+	function __construct(&$container, $alignment = 'left') {	    
 		$this->rtf = &$container->rtf;	
 		$this->container = &$container;	  
 		
-		switch ($alignment) {		  
-			case 'left':			
-				$this->alignment = '\trql ';	
-			break;
-			
-			case 'center':			
-				$this->alignment = '\trqc ';
-			break;
-			
-			case 'right':			
-				$this->alignment = '\trqr ';
-			break;
-			
-			default:			
-				$this->alignment = '\trql ';
-			break;
-		}		  
+		$this->alignment = match ($alignment) {
+      'left' => '\trql ',
+      'center' => '\trqc ',
+      'right' => '\trqr ',
+      default => '\trql ',
+  };		  
 	} 
 	  	
   	/**
@@ -113,8 +102,8 @@ class Table {
 			$this->rows[] = $height;    
 		}
 		
-		for ($i = 1; $i <= count($this->columns); $i ++ ) {		  
-		  	$this->cells[count($this->rows)][$i] = new Cell($this, count($this->rows), $i);
+		for ($i = 1; $i <= (is_countable($this->columns) ? count($this->columns) : 0); $i ++ ) {		  
+		  	$this->cells[is_countable($this->rows) ? count($this->rows) : 0][$i] = new Cell($this, is_countable($this->rows) ? count($this->rows) : 0, $i);
 		}
 	}
 	
@@ -149,8 +138,8 @@ class Table {
 	function addColumn($width) {	  
 		$this->columns[] = $width;
 		
-		for ($i = 1; $i <= count($this->rows); $i ++ ) {		  
-		  	$this->cells[$i][count($this->columns)] = new Cell($this, $i, count($this->columns));
+		for ($i = 1; $i <= (is_countable($this->rows) ? count($this->rows) : 0); $i ++ ) {		  
+		  	$this->cells[$i][is_countable($this->columns) ? count($this->columns) : 0] = new Cell($this, $i, is_countable($this->columns) ? count($this->columns) : 0);
 		}
 	}
 	
@@ -451,17 +440,17 @@ class Table {
 	
 	/** @access private */
 	function getRowsCount() {	  
-	  	return count($this->rows);
+	  	return is_countable($this->rows) ? count($this->rows) : 0;
 	}
 	
 	/** @access private */
 	function getColumnsCount() {	  
-	  	return count($this->columns);
+	  	return is_countable($this->columns) ? count($this->columns) : 0;
 	}
 		
 	/** @access private */
 	function checkIfCellExists($row, $column) {	  	  	
-	  	if ($row < 1 || $row > count($this->rows) || $column < 1 || $column > count($this->columns)) {				
+	  	if ($row < 1 || $row > (is_countable($this->rows) ? count($this->rows) : 0) || $column < 1 || $column > (is_countable($this->columns) ? count($this->columns) : 0)) {				
 		    return false;
 		}		
 		

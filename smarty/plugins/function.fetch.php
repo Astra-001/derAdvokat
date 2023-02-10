@@ -29,7 +29,7 @@ function smarty_function_fetch($params, &$smarty)
 
     $content = '';
     if ($smarty->security && !preg_match('!^(http|ftp)://!i', $params['file'])) {
-        $_params = array('resource_type' => 'file', 'resource_name' => $params['file']);
+        $_params = ['resource_type' => 'file', 'resource_name' => $params['file']];
         require_once(SMARTY_CORE_DIR . 'core.is_secure.php');
         if(!smarty_core_is_secure($_params, $smarty)) {
             $smarty->_trigger_fatal_error('[plugin] (secure mode) fetch \'' . $params['file'] . '\' is not allowed');
@@ -181,12 +181,15 @@ function smarty_function_fetch($params, &$smarty)
                         $content .= fgets($fp,4096);
                     }
                     fclose($fp);
-                    $csplit = split("\r\n\r\n",$content,2);
+                    $csplit = preg_split('#
+
+#m',$content,2);
 
                     $content = $csplit[1];
 
                     if(!empty($params['assign_headers'])) {
-                        $smarty->assign($params['assign_headers'],split("\r\n",$csplit[0]));
+                        $smarty->assign($params['assign_headers'],preg_split('#
+#m',$csplit[0]));
                     }
                 }
             } else {

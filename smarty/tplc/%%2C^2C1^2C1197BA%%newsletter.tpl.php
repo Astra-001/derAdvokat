@@ -1,7 +1,7 @@
 <?php /* Smarty version 2.6.18, created on 2014-08-13 20:27:13
          compiled from /var/customers/webs/strauchyve/derAdvokat/tpl/newsletter.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'escape', '/var/customers/webs/strauchyve/derAdvokat/tpl/newsletter.tpl', 38, false),)), $this); ?>
+smarty_core_load_plugins(['plugins' => [['modifier', 'escape', '/var/customers/webs/strauchyve/derAdvokat/tpl/newsletter.tpl', 38, false]]], $this); ?>
 <!--<script type="text/javascript" src="/derAdvokat/js/dyn_felder.js"></script>-->
 <table border="0" cellpadding="5" class="contenttable" width="100%">
 <tr>
@@ -106,7 +106,7 @@ tinyMCE.init({
     <th>Premium</th>
     <th>Aktion</th>
 </tr>
-<?php $_from = $this->_tpl_vars['artikel']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }$this->_foreach['artikel'] = array('total' => count($_from), 'iteration' => 0);
+<?php $_from = $this->_tpl_vars['artikel']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }$this->_foreach['artikel'] = ['total' => is_countable($_from) ? count($_from) : 0, 'iteration' => 0];
 if ($this->_foreach['artikel']['total'] > 0):
     foreach ($_from as $this->_tpl_vars['a']):
         $this->_foreach['artikel']['iteration']++;
@@ -170,7 +170,7 @@ if ($this->_foreach['artikel']['total'] > 0):
 					<th>Vor-/Nachname/Firma</th>
 					<th>E-Mail</th>
 				</tr>
-				<?php $_from = $this->_tpl_vars['user']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }$this->_foreach['user'] = array('total' => count($_from), 'iteration' => 0);
+				<?php $_from = $this->_tpl_vars['user']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }$this->_foreach['user'] = ['total' => is_countable($_from) ? count($_from) : 0, 'iteration' => 0];
 if ($this->_foreach['user']['total'] > 0):
     foreach ($_from as $this->_tpl_vars['u']):
         $this->_foreach['user']['iteration']++;

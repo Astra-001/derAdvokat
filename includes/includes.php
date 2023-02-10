@@ -1,6 +1,7 @@
 <?php
 require_once("defines.php");
 require_once(ROOT_DIR."classes/phprtflite/rtf/Rtf.php");
+// var_dump("Hye I am Koustab Kumar");
 #require_once("classes/tcpdf/tcpdf.php");
 #require_once("classes/tcpdf/pdf.php");
 #require_once("classes/tcpdf/config/tcpdf_config.php");
@@ -16,8 +17,8 @@ require_once(ROOT_DIR."classes/password.class.php");
 function myAutoloader ($klasse) 
 {
   // die bösesten zeichen in klassennamen mal sicherheitshalber verbieten
-  if (strpos ($klasse, '.') !== false || strpos ($klasse, '/') !== false
-      || strpos ($klasse, '\\') !== false || strpos ($klasse, ':') !== false) {
+  if (str_contains ($klasse, '.') || str_contains ($klasse, '/')
+      || str_contains ($klasse, '\\') || str_contains ($klasse, ':')) {
     return;
   }
   if (file_exists (ROOT_DIR.'classes/'.$klasse.'.class.php')) {

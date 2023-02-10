@@ -32,7 +32,7 @@ class Util {
 	 * @static
 	 */
 	function formatColor($color) {	  
-	  	if (strlen($color) == 7 & substr($color, 0, 1) == '#') {		    	    
+	  	if (strlen($color) == 7 & str_starts_with($color, '#')) {		    	    
 		    return '\red'.hexdec(substr($color, 1, 2)).'\green'.hexdec(substr($color, 3, 2)).'\blue'.hexdec(substr($color, 5, 2));
 		}		
 	  	return $color;		  
@@ -45,7 +45,7 @@ class Util {
 	 * @static	 
 	 */	
 	function utf8Unicode($str) {
-	  	return Util::unicodeToEntitiesPreservingAscii(Util::utf8ToUnicode($str));
+	  	return (new Util())->unicodeToEntitiesPreservingAscii((new Util())->utf8ToUnicode($str));
 	}
 	
 	/**
@@ -54,8 +54,8 @@ class Util {
 	* @static
 	*/
 	function utf8ToUnicode($str) {        
-	    $unicode = array();        
-	    $values = array();
+	    $unicode = [];        
+	    $values = [];
 	    $lookingFor = 1;    
 	    
 	    for ($i = 0; $i < strlen($str); $i++ ) {
@@ -76,7 +76,7 @@ class Util {
 	                	( ( $values[0] % 32 ) * 64 ) + ( $values[1] % 64 );
 	                    
 	                $unicode[] = $number;
-	                $values = array();
+	                $values = [];
 	                $lookingFor = 1;        
 	            }         
 	        }         

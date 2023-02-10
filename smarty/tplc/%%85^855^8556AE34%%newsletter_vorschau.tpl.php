@@ -1,7 +1,7 @@
 <?php /* Smarty version 2.6.18, created on 2019-02-08 16:01:31
          compiled from /var/customers/webs/strauchyve/derAdvokat/tpl/newsletter_vorschau.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'escape', '/var/customers/webs/strauchyve/derAdvokat/tpl/newsletter_vorschau.tpl', 13, false),)), $this); ?>
+smarty_core_load_plugins(['plugins' => [['modifier', 'escape', '/var/customers/webs/strauchyve/derAdvokat/tpl/newsletter_vorschau.tpl', 13, false]]], $this); ?>
 <div class="contenttable">
 <table border="0" cellpadding="5">
 <tr>
@@ -22,7 +22,7 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'escape', '/
 <table border="0" cellpadding="5">
 <tr>
 	<td><?php $_smarty_tpl_vars = $this->_tpl_vars;
-$this->_smarty_include(array('smarty_include_tpl_file' => (@SMARTY_TEMPLATE_DIR)."newsletter_vorschau_include.tpl", 'smarty_include_vars' => array()));
+$this->_smarty_include(['smarty_include_tpl_file' => (@SMARTY_TEMPLATE_DIR)."newsletter_vorschau_include.tpl", 'smarty_include_vars' => []]);
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?></td>

@@ -4,12 +4,11 @@ if(!defined('INDEX_LOAD')) {
 }
 class bussgeldrechner_abstand
 {
- 	private $_smarty = null;
-
-	public function __construct($_smarty,$database)
+ 	public function __construct(private $_smarty,$database)
 	{
-		$this->_smarty = $_smarty;
-		$this->_db = $database;
+		$smarty = null;
+  $check_input = [];
+  $this->_db = $database;
 
 		if(isset($_POST['abstand_bussgeld_berechnung']))
 		{
@@ -50,7 +49,10 @@ class bussgeldrechner_abstand
 	}//KONSTRUKTOR ENDE
 	public function stufe_4($vergleich)
 	{
-		switch($vergleich)
+		$euro = null;
+  $punkte = null;
+  $fahrverbot = null;
+  switch($vergleich)
 		{
 			case 5: $euro=100; $punkte="2 Punkte";break;
 			case 4: $euro=180; $punkte="3 Punkte";break;
@@ -69,7 +71,10 @@ class bussgeldrechner_abstand
 	}
 	public function stufe_3($vergleich)
 	{
-		switch($vergleich)
+		$euro = null;
+  $punkte = null;
+  $fahrverbot = null;
+  switch($vergleich)
 		{
 			case 5: $euro=75;  $punkte="1 Punkt";break;
 			case 4: $euro=100; $punkte="2 Punkte";break;
@@ -88,7 +93,9 @@ class bussgeldrechner_abstand
 	}
 	public function stufe_2($vergleich)
 	{
-		switch($vergleich)
+		$euro = null;
+  $punkte = null;
+  switch($vergleich)
 		{
 			case 5: $euro=75;  $punkte="1 Punkt";break;
 			case 4: $euro=100; $punkte="2 Punkte";break;
@@ -117,8 +124,9 @@ class bussgeldrechner_abstand
 
 	public function vergleich($abstand=null,$berechnung=null)
 	{
-		#echo "Abstand-".$abstand;
-		for($x=1;$x<=count($berechnung);$x++)
+		$vergleich_array = [];
+  #echo "Abstand-".$abstand;
+		for($x=1;$x<=(is_countable($berechnung) ? count($berechnung) : 0);$x++)
 		{
 			if($abstand<=$berechnung[$x])#Abstand
 			{
@@ -138,7 +146,8 @@ class bussgeldrechner_abstand
 	}
 	public function berechnung($speed=null)
 	{
-		$halb_gesch=$speed/2;
+		$meter_array = [];
+  $halb_gesch=$speed/2;
 		#echo "<br/>Halbierte Geschwindigkeit-".$halb_gesch;
 
 		for($i=1;$i<=5;$i++)
@@ -151,7 +160,8 @@ class bussgeldrechner_abstand
 	}
 	public function geschwindigkeit_stuffe($geschwindigkeit=null)
 	{
-		if($geschwindigkeit>0 && $geschwindigkeit<=80)
+		$geschwindigkeit_stuffe = null;
+  if($geschwindigkeit>0 && $geschwindigkeit<=80)
 		{
 			$geschwindigkeit_stuffe=1;
 		}
@@ -172,7 +182,10 @@ class bussgeldrechner_abstand
 
 	public function check_input($distance=null,$speed=null)
 	{
-		#ABSTAND
+		$msg = null;
+  $distance_erg = null;
+  $speed_erg = null;
+  #ABSTAND
 		if (isset($distance))
 		{
 		   $distance = str_replace(',', '.', $distance);
@@ -213,7 +226,7 @@ class bussgeldrechner_abstand
 
 		if($distance_erg && $speed_erg)
 		{
-			return array($distance,$speed);
+			return [$distance, $speed];
 		}
 		return false;
 	}

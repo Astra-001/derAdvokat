@@ -1,7 +1,7 @@
 <?php /* Smarty version 2.6.18, created on 2014-07-19 09:42:07
          compiled from /var/customers/webs/strauchyve/derAdvokat/tpl/feed.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'date_format', '/var/customers/webs/strauchyve/derAdvokat/tpl/feed.tpl', 9, false),array('modifier', 'escape', '/var/customers/webs/strauchyve/derAdvokat/tpl/feed.tpl', 22, false),)), $this); ?>
+smarty_core_load_plugins(['plugins' => [['modifier', 'date_format', '/var/customers/webs/strauchyve/derAdvokat/tpl/feed.tpl', 9, false], ['modifier', 'escape', '/var/customers/webs/strauchyve/derAdvokat/tpl/feed.tpl', 22, false]]], $this); ?>
 <?php echo '<?xml'; ?>
  version="1.0" encoding="utf-8"<?php echo '?>'; ?>
 
@@ -18,7 +18,7 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'date_format
   <id>http://www.deradvokat.de/derAdvokat/</id>
   <logo>http://www.deradvokat.de/derAdvokat/grafik/logo_advokat_png.png</logo>
 
-<?php $_from = $this->_tpl_vars['artikel']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }$this->_foreach['artikel'] = array('total' => count($_from), 'iteration' => 0);
+<?php $_from = $this->_tpl_vars['artikel']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }$this->_foreach['artikel'] = ['total' => is_countable($_from) ? count($_from) : 0, 'iteration' => 0];
 if ($this->_foreach['artikel']['total'] > 0):
     foreach ($_from as $this->_tpl_vars['a']):
         $this->_foreach['artikel']['iteration']++;

@@ -36,7 +36,7 @@ class FPDF extends TCPDF {
                 return $this->k;
             default:
                 // Error handling
-                $this->Error('Cannot access protected property '.get_class($this).':$'.$name.' / Undefined property: '.get_class($this).'::$'.$name);
+                $this->Error('Cannot access protected property '.static::class.':$'.$name.' / Undefined property: '.static::class.'::$'.$name);
         }
     }
 
@@ -47,7 +47,7 @@ class FPDF extends TCPDF {
                 break;
             default:
                 // Error handling
-                $this->Error('Cannot access protected property '.get_class($this).':$'.$name.' / Undefined property: '.get_class($this).'::$'.$name);
+                $this->Error('Cannot access protected property '.static::class.':$'.$name.' / Undefined property: '.static::class.'::$'.$name);
         }
     }
 
@@ -156,7 +156,7 @@ class FPDF extends TCPDF {
      * @return string
      */
     function hex2str($hex) {
-    	return pack('H*', str_replace(array("\r", "\n", ' '), '', $hex));
+    	return pack('H*', str_replace(["\r", "\n", ' '], '', $hex));
     }
     
     /**

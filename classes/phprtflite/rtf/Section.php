@@ -30,43 +30,43 @@ class Section extends Container {
 	 * Internal use.
 	 * @access public
 	 */ 	
-	var $bordered;
+	public $bordered;
 	  
-	var $first = false;	
+	public $first = false;	
 	
-	var $alignment;
+	public $alignment;
 	
-	var $oddEvenDifferent;  	
+	public $oddEvenDifferent;  	
 	/**#@-*/	
 	
 	/**#@+ 	 
 	 * @access private
 	 */ 
-	var $columnCount = 1;
+	public $columnCount = 1;
 	
-	var $columnsWidths;
+	public $columnsWidths;
 	
-	var $noBreak = false;
+	public $noBreak = false;
 	
-	var $lineBetweenColumns = false;
+	public $lineBetweenColumns = false;
 	
-	var $spaceBetweenColumns;
+	public $spaceBetweenColumns;
 	 
-	var $paperWidth;  	
+	public $paperWidth;  	
 	
-	var $paperHeight;
+	public $paperHeight;
 	  	
-	var $marginLeft;
+	public $marginLeft;
 	
-	var $marginRight;
+	public $marginRight;
 	
-	var $marginTop;
+	public $marginTop;
 	
-	var $marginBottom;
+	public $marginBottom;
 	
-	var $gutter;
+	public $gutter;
 	  	
-	var $mirrorMargins;	
+	public $mirrorMargins;	
 	/**#@-*/	
 		
 	/**
@@ -212,23 +212,12 @@ class Section extends Container {
 	 * @accces public
 	 */
 	function setVerticalAlignment($alignment) {	  
-	  	switch ($alignment) {		    
-		    default: 		    
-		    	$this->alignment = "\vertalt ";
-		    break;
-		    
-		    case 'center':		    	
-		    	$this->alignment = "\vertalc ";
-		    break;
-		    
-		    case 'bottom':		    	
-		    	$this->alignment = "\vertalb ";
-		    break;		    
-		    
-		    case 'justify':		    	
-		    	$this->alignment = "\vertalj ";
-		    break;
-		}
+	  	$this->alignment = match ($alignment) {
+        'center' => "\vertalc ",
+        'bottom' => "\vertalb ",
+        'justify' => "\vertalj ",
+        default => "\vertalt ",
+    };
 	}
 		
 	/**
@@ -355,7 +344,7 @@ class Section extends Container {
 		  	}
 		  	
 		  	$printableWidth = ($this->rtf->paperWidth - $this->rtf->marginLeft - $this->rtf->marginRight);		  	
-		  	$space = round(($printableWidth * TWIPS_IN_CM - $width) / (count($this->columnsWidths) - 1));
+		  	$space = round(($printableWidth * TWIPS_IN_CM - $width) / ((is_countable($this->columnsWidths) ? count($this->columnsWidths) : 0) - 1));
 		  			  	
 			$i = 1;
 		  	foreach ($this->columnsWidths as $key => $value) {

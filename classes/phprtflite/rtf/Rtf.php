@@ -24,7 +24,6 @@ define('SPACE_IN_LINES', 240);
 define('TWIPS_IN_CM', 567);
 
 define('RTF_DEFAULT_TAB_WIDTH', 720);
-
 require_once('Util.php');
 require_once('Container.php');
 require_once('Header.php');
@@ -33,7 +32,7 @@ require_once('Section.php');
 require_once('Font.php');
 require_once('Bordered.php');
 require_once('ParFormat.php');
-require_once('Table.php');
+require_once(__DIR__.'/Table.php');
 require_once('Cell.php');
 require_once('Image.php');
 require_once('BorderFormat.php');
@@ -51,62 +50,62 @@ class Rtf {
 	 * Internal use.
 	 * @access public
 	 */ 
-	var $sections = array();
+	public $sections = [];
 	
-	var $headers = array();
+	public $headers = [];
 	
-	var $footers = array();
+	public $footers = [];
 	
-	var $paperWidth = 21;  	
+	public $paperWidth = 21;  	
 	
-	var $paperHeight = 29;
+	public $paperHeight = 29;
 	  	
-	var $marginLeft = 3;
+	public $marginLeft = 3;
 	
-	var $marginRight = 3;
+	public $marginRight = 3;
 	
-	var $marginTop = 1;
+	public $marginTop = 1;
 	
-	var $marginBottom = 2;
+	public $marginBottom = 2;
 	
-	var $oddEvenDifferent;	
+	public $oddEvenDifferent;	
 	/**#@-*/  	  	
 	
 	/**#@+ @access private */    		  
-	var $content;
+	public $content;
 	
-	var $fonts = array();  	
+	public $fonts = [];  	
 	
-	var $colors = array('\red0\green0\blue0' => 1);
+	public $colors = ['\red0\green0\blue0' => 1];
 	
-	var $info = array();
+	public $info = [];
 	  	    	
-	var $defaultTabWidth = 2.29;
+	public $defaultTabWidth = 2.29;
 		    	
-	var $viewMode;
+	public $viewMode;
 	
-	var $zoom;
+	public $zoom;
 	
-	var $zoomKind; 	
+	public $zoomKind; 	
 	  	  	
-	var $gutter;  	
+	public $gutter;  	
 	  	
-	var $mirrorMargins;
+	public $mirrorMargins;
 	  	
-	var $startPage;				
+	public $startPage;				
 	
-	var $titlepg = 0;
+	public $titlepg = 0;
 			
-	var $bordered;
+	public $bordered;
 	
-	var $landscape;
+	public $landscape;
 	/**#@-*/  	  	
 	
 	/**
 	 * Rtf constructor.
 	 * @access public
 	 */
-	function Rtf() {	  
+	function __construct() {	  
 		$this->addFont('Times new Roman');	
 	}  
 	   
@@ -128,10 +127,10 @@ class Rtf {
 	 * 'printim' => last print time (value int) <br>
 	 * @param mixed $value Value
 	 */    
-	function setInfo($property, $value) {	  
-		if (is_string($value) && in_array($property, array('title', 'subject', 'author', 'manager', 'company', 'operator', 'category', 'keywords', 'comments', 'doccomm', 'hlinkbase'))) {		  
+	function setInfo($property, mixed $value) {	  
+		if (is_string($value) && in_array($property, ['title', 'subject', 'author', 'manager', 'company', 'operator', 'category', 'keywords', 'comments', 'doccomm', 'hlinkbase'])) {		  
 		  	$this->info[$property] = str_replace('\\', '\\\\', $value);
-		} else if (is_int($value) && in_array($property, array('creatim', 'revtim', 'buptim', 'printim'))) {		  		  	
+		} else if (is_int($value) && in_array($property, ['creatim', 'revtim', 'buptim', 'printim'])) {		  		  	
 			$year = date("Y", $value);
 		  	$month = date("m", $value);
 		  	$day = date("d", $value);
@@ -486,7 +485,8 @@ class Rtf {
 		 
 	/** @access private */
 	function prepare() {	  					    
-		$part = $this->getInfoPart();
+		$content = null;
+  $part = $this->getInfoPart();
 		
 		//page properties
 		$part .= !empty($this->landscape) ? '\landscape ' : '';

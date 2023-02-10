@@ -26,26 +26,21 @@
 */
 class Font {
 
-    /**#@+ @access private */
-    var $size;
+    public $fontColor;
 
-    var $font;
-
-    var $fontColor;
-
-    var $backColor;
+    public $backColor;
    
-    var $bold;
+    public $bold;
     
-    var $italic;
+    public $italic;
     
-    var $underline;
+    public $underline;
     
-    var $strike;
+    public $strike;
     
-    var $strikeDouble;
+    public $strikeDouble;
     
-    var $animatedText;
+    public $animatedText;
     /**#@-*/
         
     /**
@@ -55,11 +50,10 @@ class Font {
      * @param string Font color
      * @param string Background color of font
      */
-    function Font($size = 10, $font = '', $fontColor = '', $backColor = '') {      
-      	$this->size = $size;
-		$this->font = $font;
-		$this->fontColor = Util::formatColor($fontColor);
-		$this->backColor = Util::formatColor($backColor);	  
+    function __construct(/**#@+ @access private */
+    public $size = 10, public $font = '', $fontColor = '', $backColor = '') {      
+      	$this->fontColor = (new Util())->formatColor($fontColor);
+		$this->backColor = (new Util())->formatColor($backColor);	  
 	}
 	
 	/**

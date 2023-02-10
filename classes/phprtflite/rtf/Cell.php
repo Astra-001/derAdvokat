@@ -29,35 +29,31 @@ class Cell extends Container {
 	 * Internal use.
 	 * @access public
 	 */   
-	var $table;
-
-	var $row;
+	public $table;
 	
-	var $column;
-	
-	var $elements = array();
+	public $elements = [];
 		
-	var $alignment;
+	public $alignment;
 	
-	var $text;
+	public $text;
 	
-	var $font;
+	public $font;
 	
-	var $direction;
+	public $direction;
 	
-	var $backColor;
+	public $backColor;
 	
-	var $bordered;	
+	public $bordered;	
 	
-	var $width;
+	public $width;
 	
-	var $horMerged;
+	public $horMerged;
 	
-	var $verMerged;
+	public $verMerged;
 	
-	var $verStart;
+	public $verStart;
 
-	var $pard = '\pard \intbl ';
+	public $pard = '\pard \intbl ';
 	/**#@-*/ 
 
 	/**
@@ -66,11 +62,9 @@ class Cell extends Container {
 	 * @param int $row Row number
 	 * @param int $column Column number
 	 */
-	function Cell(&$table, $row, $column) {	  
+	function __construct(&$table, public $row, public $column) {	  
 	  	$this->table = &$table;
-		$this->rtf = &$table->rtf;	  
-		$this->row = $row;
-		$this->column = $column;
+		$this->rtf = &$table->rtf;
 		
 		$this->isCell = 1;
 	}
@@ -168,7 +162,7 @@ class Cell extends Container {
 	 * @access public
 	 */
 	function setBackGround($backColor) {
-		$backColor = Util::formatColor($backColor);				
+		$backColor = (new Util())->formatColor($backColor);				
 		$this->rtf->addColor($backColor);	
 		$this->backColor = $backColor;	
 	}	

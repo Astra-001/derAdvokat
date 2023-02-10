@@ -1,7 +1,7 @@
 <?php /* Smarty version 2.6.18, created on 2014-07-21 16:35:18
          compiled from /var/customers/webs/strauchyve/derAdvokat/tpl/kontakt.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'escape', '/var/customers/webs/strauchyve/derAdvokat/tpl/kontakt.tpl', 14, false),)), $this); ?>
+smarty_core_load_plugins(['plugins' => [['modifier', 'escape', '/var/customers/webs/strauchyve/derAdvokat/tpl/kontakt.tpl', 14, false]]], $this); ?>
 <h1>Kontaktformular</h1>
 <?php if ($_REQUEST['act'] == 'send' && ! strlen ( $this->_tpl_vars['msg'] )): ?>
 <div class="contenttable">Vielen Dank,<br />

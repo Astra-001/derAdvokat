@@ -1,18 +1,15 @@
 <?php
 class mail_selbsttest
 {
-    var $from;
-    var $to;
-    var $subject;
-    var $contentType = "text/plain; charset=UTF-8";
-    var $header = '';
-    var $template;
-    var $smarty;
+    public $to;
+    public $subject;
+    public $contentType = "text/plain; charset=UTF-8";
+    public $header = '';
+    public $template;
+    public $smarty;
 
-    function mail_selbsttest($from = EMAIL)
+    function __construct(public $from = EMAIL)
     {
-        $this->from = $from;
-
         $this->smarty = new Smarty();
         $this->smarty->compile_dir = SMARTY_TEMPLATE_CACHE_DIR;
     }

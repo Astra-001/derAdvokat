@@ -226,10 +226,10 @@
 	<tr>
 		<td><br/><br/>
 		
-			<input type="checkbox" name="verpackungsschritte_abfuellen" value="abfuellen" <?php if ($_POST['verpackungsschritte_abfuellen'] == abfuellen): ?> checked="checked" <?php endif; ?> /> - Abf&uuml;llen<br/><br/>
-			<input type="checkbox" name="verpackungsschritte_verschliessen" value="verschliessen" <?php if ($_POST['verpackungsschritte_verschliessen'] == verschliessen): ?> checked="checked" <?php endif; ?> /> - Verschlie&szlig;en<br/><br/>
-			<input type="checkbox" name="verpackungsschritte_etiketieren" value="etiketieren" <?php if ($_POST['verpackungsschritte_etiketieren'] == etiketieren): ?> checked="checked" <?php endif; ?> /> - Etikettieren<br/><br/>
-			<input type="checkbox" name="verpackungsschritte_kennziefern" value="kennziefern" <?php if ($_POST['verpackungsschritte_kennziefern'] == kennziefern): ?> checked="checked" <?php endif; ?> /> - Versehen mit Kennziffern<br/><br/>
+			<input type="checkbox" name="verpackungsschritte_abfuellen" value="abfuellen" <?php if ($_POST['verpackungsschritte_abfuellen'] == \ABFUELLEN): ?> checked="checked" <?php endif; ?> /> - Abf&uuml;llen<br/><br/>
+			<input type="checkbox" name="verpackungsschritte_verschliessen" value="verschliessen" <?php if ($_POST['verpackungsschritte_verschliessen'] == \VERSCHLIESSEN): ?> checked="checked" <?php endif; ?> /> - Verschlie&szlig;en<br/><br/>
+			<input type="checkbox" name="verpackungsschritte_etiketieren" value="etiketieren" <?php if ($_POST['verpackungsschritte_etiketieren'] == \ETIKETIEREN): ?> checked="checked" <?php endif; ?> /> - Etikettieren<br/><br/>
+			<input type="checkbox" name="verpackungsschritte_kennziefern" value="kennziefern" <?php if ($_POST['verpackungsschritte_kennziefern'] == \KENNZIEFERN): ?> checked="checked" <?php endif; ?> /> - Versehen mit Kennziffern<br/><br/>
 
 				</td>
 	</tr>
@@ -309,10 +309,10 @@
 <tr>
 	<td colspan="2"><br/>
 	
-	<input type="checkbox" name="haftung_gewinn" value="gewinn" <?php if ($_POST['haftung_gewinn'] == gewinn): ?> checked="checked" <?php endif; ?> /> - entgangenen Gewinn<br/><br/>
-	<input type="checkbox" name="haftung_ruckruf" value="ruckruf" <?php if ($_POST['haftung_ruckruf'] == ruckruf): ?> checked="checked" <?php endif; ?> /> - Kosten von R&uuml;ckrufaktionen<br/><br/>
-	<input type="checkbox" name="haftung_geldbuss" value="geldbuss" <?php if ($_POST['haftung_geldbuss'] == geldbuss): ?> checked="checked" <?php endif; ?> /> - Geldbu&szlig;en<br/><br/>
-	<input type="checkbox" name="haftung_gutachter" value="gutachter" <?php if ($_POST['haftung_gutachter'] == gutachter): ?> checked="checked" <?php endif; ?> /> - Gutachterkosten<br/><br/>
+	<input type="checkbox" name="haftung_gewinn" value="gewinn" <?php if ($_POST['haftung_gewinn'] == \GEWINN): ?> checked="checked" <?php endif; ?> /> - entgangenen Gewinn<br/><br/>
+	<input type="checkbox" name="haftung_ruckruf" value="ruckruf" <?php if ($_POST['haftung_ruckruf'] == \RUCKRUF): ?> checked="checked" <?php endif; ?> /> - Kosten von R&uuml;ckrufaktionen<br/><br/>
+	<input type="checkbox" name="haftung_geldbuss" value="geldbuss" <?php if ($_POST['haftung_geldbuss'] == \GELDBUSS): ?> checked="checked" <?php endif; ?> /> - Geldbu&szlig;en<br/><br/>
+	<input type="checkbox" name="haftung_gutachter" value="gutachter" <?php if ($_POST['haftung_gutachter'] == \GUTACHTER): ?> checked="checked" <?php endif; ?> /> - Gutachterkosten<br/><br/>
 	
 	</td>
 </tr>

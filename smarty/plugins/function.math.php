@@ -21,6 +21,7 @@
  */
 function smarty_function_math($params, &$smarty)
 {
+    $smarty_math_result = null;
     // be sure equation parameter is present
     if (empty($params['equation'])) {
         $smarty->trigger_error("math: missing equation parameter");
@@ -37,8 +38,7 @@ function smarty_function_math($params, &$smarty)
 
     // match all vars in equation, make sure all are passed
     preg_match_all("!(?:0x[a-fA-F0-9]+)|([a-zA-Z][a-zA-Z0-9_]+)!",$equation, $match);
-    $allowed_funcs = array('int','abs','ceil','cos','exp','floor','log','log10',
-                           'max','min','pi','pow','rand','round','sin','sqrt','srand','tan');
+    $allowed_funcs = ['int', 'abs', 'ceil', 'cos', 'exp', 'floor', 'log', 'log10', 'max', 'min', 'pi', 'pow', 'rand', 'round', 'sin', 'sqrt', 'srand', 'tan'];
     
     foreach($match[1] as $curr_var) {
         if ($curr_var && !in_array($curr_var, array_keys($params)) && !in_array($curr_var, $allowed_funcs)) {

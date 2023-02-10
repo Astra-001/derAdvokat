@@ -9,14 +9,9 @@ class log_funk
 
 	public $table = null;
 
- 	private $_smarty = null;
- 	private $_database = null;
-
-	public function __construct($_smarty,$_database)
-	{
-		$this->_smarty = $_smarty;
-		$this->_database = $_database;
-	}
+	public function __construct(private $_smarty, private $_database)
+ {
+ }
 
 	public function log_ausgabe($log)
 	{
@@ -27,7 +22,7 @@ class log_funk
 		$records = $log->getRecords();
 		$anz = $log->countRecords();
 
-		return array($records,$anz);
+		return [$records, $anz];
 	}
 
 	//--LOG TAB EINTRAG

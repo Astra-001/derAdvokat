@@ -2,7 +2,7 @@
          compiled from /var/customers/webs/strauchyve/derAdvokat/tpl/navi.tpl */ ?>
 <table border="0" width="<?php if (! $_GET['task']): ?>210<?php else: ?>210<?php endif; ?>" cellpadding="2">
 
-<?php $_from = $this->_tpl_vars['kategorien']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }$this->_foreach['kategorien'] = array('total' => count($_from), 'iteration' => 0);
+<?php $_from = $this->_tpl_vars['kategorien']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }$this->_foreach['kategorien'] = ['total' => is_countable($_from) ? count($_from) : 0, 'iteration' => 0];
 if ($this->_foreach['kategorien']['total'] > 0):
     foreach ($_from as $this->_tpl_vars['k']):
         $this->_foreach['kategorien']['iteration']++;

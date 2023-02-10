@@ -1,7 +1,7 @@
 <?php /* Smarty version 2.6.18, created on 2014-07-19 03:30:57
          compiled from /var/customers/webs/strauchyve/derAdvokat/tpl/artikelview.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'escape', '/var/customers/webs/strauchyve/derAdvokat/tpl/artikelview.tpl', 9, false),array('modifier', 'date_format', '/var/customers/webs/strauchyve/derAdvokat/tpl/artikelview.tpl', 27, false),)), $this); ?>
+smarty_core_load_plugins(['plugins' => [['modifier', 'escape', '/var/customers/webs/strauchyve/derAdvokat/tpl/artikelview.tpl', 9, false], ['modifier', 'date_format', '/var/customers/webs/strauchyve/derAdvokat/tpl/artikelview.tpl', 27, false]]], $this); ?>
 <div class="contenttable">
 <table border="0" cellpadding="5">
 <tr>

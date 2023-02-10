@@ -4,11 +4,9 @@ if(!defined('INDEX_LOAD')) {
 }
 class mutterschutzurlaub
 {
- 	private $_smarty = null;
-
-	public function __construct($_smarty,$database)
+ 	public function __construct(private $_smarty,$database)
 	{
-		$this->_smarty = $_smarty;
+		$smarty = null;
 		$this->_db = $database;
 
 		if($_SESSION['user'])
@@ -63,26 +61,28 @@ class mutterschutzurlaub
 
 	protected function monat_ausgabe($monat)
 	{
-		switch($monat)
-		{
-			case '01': $monat="Januar";break;
-			case '02': $monat="Februar";break;
-			case '03': $monat="M&auml;rz";break;
-			case '04': $monat="April";break;
-			case '05': $monat="Mai";break;
-			case '06': $monat="Juni";break;
-			case '07': $monat="Juli";break;
-			case '08': $monat="August";break;
-			case '09': $monat="September";break;
-			case '10': $monat="Oktober";break;
-			case '11': $monat="November";break;
-			case '12': $monat="Dezember";break;
-		}
+		$monat = match ($monat) {
+      '01' => "Januar",
+      '02' => "Februar",
+      '03' => "M&auml;rz",
+      '04' => "April",
+      '05' => "Mai",
+      '06' => "Juni",
+      '07' => "Juli",
+      '08' => "August",
+      '09' => "September",
+      '10' => "Oktober",
+      '11' => "November",
+      '12' => "Dezember",
+      default => $monat,
+  };
 		return $monat;
 	}
 	protected function back_berechnung($set_date)
 	{
-		$back=42;
+		$daysArray = [];
+  $mounth_year_negativ = [];
+  $back=42;
 
 		for($m=1;$m<=12;$m++)//LIEFERT ALLE MONATE SAMT ANZAHL DER TAGEN ZU JEDEM
 		{
@@ -147,7 +147,7 @@ class mutterschutzurlaub
 
 
 		}
-		return array($erg,$mounth_year_negativ[0],$mounth_year_negativ[1]);
+		return [$erg, $mounth_year_negativ[0], $mounth_year_negativ[1]];
 	}
 	protected function mounth_year_negativ($monat,$jahr)
 	{
@@ -161,11 +161,13 @@ class mutterschutzurlaub
 			$monat=($monat)+12;
 			$jahr-=1;
 		}
-		return array($monat,$jahr);
+		return [$monat, $jahr];
 	}
 	protected function vor_berechnung($merlinge,$set_date)
 	{
-		if($merlinge==1){
+		$daysArray = [];
+  $mounth_year_positiv = [];
+  if($merlinge==1){
 			$schutz_lange=84;
 		}else{
 			$schutz_lange=56;
@@ -237,7 +239,7 @@ class mutterschutzurlaub
 				$tag_erg=$rest_1;
 			}
 		}
-		return array($tag_erg,$mounth_year_positiv[0],$mounth_year_positiv[1]);
+		return [$tag_erg, $mounth_year_positiv[0], $mounth_year_positiv[1]];
 	}
 
 	protected function mounth_year_positiv($monat,$jahr)
@@ -261,7 +263,7 @@ class mutterschutzurlaub
 		}
 		#echo "<br>Mounth: ".$monat;
 		#echo "</br>Year: ".$jahr;
-		return array($monat,$jahr);
+		return [$monat, $jahr];
 	}
 
 	protected function anz_tagen_im_monat($monat,$jahr)
@@ -292,7 +294,7 @@ class mutterschutzurlaub
 			case '11': $tagen=30;break;
 			case '12': $tagen=31;break;
 		}
-		return array($tagen,$monat);
+		return [$tagen, $monat];
 	}
 
 	protected function schaltjahr($jahr)

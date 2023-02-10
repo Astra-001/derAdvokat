@@ -36,7 +36,7 @@ n<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.o
     </div>
     <?php if (strlen ( $this->_tpl_vars['fehler'] )): ?>
     	<div id="error"><?php $_smarty_tpl_vars = $this->_tpl_vars;
-$this->_smarty_include(array('smarty_include_tpl_file' => (@SMARTY_TEMPLATE_DIR)."meldung.tpl", 'smarty_include_vars' => array()));
+$this->_smarty_include(['smarty_include_tpl_file' => (@SMARTY_TEMPLATE_DIR)."meldung.tpl", 'smarty_include_vars' => []]);
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?></div>
@@ -47,7 +47,7 @@ unset($_smarty_tpl_vars);
             <div id="nav_content_wrapper">
         <?php endif; ?>
             <?php $_smarty_tpl_vars = $this->_tpl_vars;
-$this->_smarty_include(array('smarty_include_tpl_file' => (@SMARTY_TEMPLATE_DIR)."navi.tpl", 'smarty_include_vars' => array()));
+$this->_smarty_include(['smarty_include_tpl_file' => (@SMARTY_TEMPLATE_DIR)."navi.tpl", 'smarty_include_vars' => []]);
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
@@ -58,7 +58,7 @@ unset($_smarty_tpl_vars);
         <?php if (isset ( $_REQUEST['task'] )): ?>
         <div id="content">
             <?php $_smarty_tpl_vars = $this->_tpl_vars;
-$this->_smarty_include(array('smarty_include_tpl_file' => (@SMARTY_TEMPLATE_DIR).($this->_tpl_vars['contentTemplate']), 'smarty_include_vars' => array()));
+$this->_smarty_include(['smarty_include_tpl_file' => (@SMARTY_TEMPLATE_DIR).($this->_tpl_vars['contentTemplate']), 'smarty_include_vars' => []]);
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>

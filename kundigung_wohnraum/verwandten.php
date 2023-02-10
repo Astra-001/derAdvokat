@@ -80,7 +80,7 @@ switch($_POST['geschlecht'])
 	    $absatz4 = "Der Fortsetzung des Mietverhältnisses über diesen Zeitpunkt hinaus wird gemäß § 545 BGB bereits jetzt widersprochen. ";
 	    $sect->writeText($absatz4.'<br />', $fontPar, $parPar);
 	    
-	    for ($i=0;$i<count($verwand);$i++) {
+	    for ($i=0;$i<(is_countable($verwand) ? count($verwand) : 0);$i++) {
 	      switch($verwand[$i])
 	      {
 		case 1: $andr="Herrn";

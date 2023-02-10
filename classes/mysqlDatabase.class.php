@@ -7,31 +7,31 @@
 * */
 class mysqlDatabase
 {
-	/** @var string MySQL Host */
-	var $host;
-	/** @var string MySQL User */
-	var $user;
-	/** @var string MySQL Passwort */
-	var $pass;
 	/** @var ressource Connection Ressource */
-	var $linkDB;
+	public $linkDB = NULL;
 	/** @var string SQL Abfrage */
-	var $sql;
+	public $sql;
 	/** @var ressource SQL Result */
-	var $result;
+	public $result;
 
 	/**
-	* @param $host MySQL Host
-	* @param $user MySQL Benutzer
-	* @param $user MySQL Passwort
-	*/
-	function __construct($host = MYSQL_HOST, $user = MYSQL_USER, $pass = MYSQL_PASS)
-	{
-		$this->host = $host;
-		$this->user = $user;
-		$this->pass = $pass;
-		$this->linkDB = NULL;
-	}
+  * @param $host MySQL Host
+  * @param $user MySQL Benutzer
+  * @param $user MySQL Passwort
+  * @param string $host
+  * @param string $user
+  * @param string $pass
+  */
+ function __construct(
+     /** @var string MySQL Host */
+     $host = MYSQL_HOST,
+     /** @var string MySQL User */
+     $user = MYSQL_USER,
+     /** @var string MySQL Passwort */
+     $pass = MYSQL_PASS
+ )
+ {
+ }
 
 	/**
 	* Öffnet die Datenbankverbindung
@@ -151,7 +151,7 @@ class mysqlDatabase
 	*/
 	function fetchArrayList()
 	{
-		$rows = array();
+		$rows = [];
 
         while($row = $this->fetchArray())
 			$rows[] = $row;
@@ -166,7 +166,7 @@ class mysqlDatabase
 	*/
 	function fetchRowList()
 	{
-		$rows = array();
+		$rows = [];
 
         while($row = $this->fetchRow())
 			$rows[] = $row;
@@ -181,7 +181,7 @@ class mysqlDatabase
 	*/
 	function fetchAssocList()
 	{
-		$rows = array();
+		$rows = [];
 
         while($row = $this->fetchAssoc())
 			$rows[] = $row;
@@ -196,7 +196,7 @@ class mysqlDatabase
 	*/
 	function fetchObjectList()
 	{
-		$rows = array();
+		$rows = [];
 
         while($row = $this->fetchObject())
 			$rows[] = $row;
@@ -213,7 +213,7 @@ class mysqlDatabase
 	*/
 	function fetchResultList($field = 0)
 	{
-		$rows = array();
+		$rows = [];
 
         while($row = $this->fetchResult($field))
 			$rows[] = $row;

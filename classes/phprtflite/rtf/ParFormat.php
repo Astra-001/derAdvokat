@@ -27,25 +27,25 @@
 class ParFormat {
 
 	/**#@+ @access private */
-	var $alignment = '';
+	public $alignment = '';
 	
-	var $indentFirst;
+	public $indentFirst;
 	
-	var $indentLeft;
+	public $indentLeft;
 	
-	var $indentRight;
+	public $indentRight;
 		
-	var $spaceBefore;
+	public $spaceBefore;
 	
-	var $spaceAfter;
+	public $spaceAfter;
 	
-	var $spaceBetweenLines;
+	public $spaceBetweenLines;
 	
-	var $shading;
+	public $shading;
 	
-	var $backColor;	
+	public $backColor;	
 	
-	var $bordered;
+	public $bordered;
 	/**#@-*/
 	
 	/**
@@ -57,7 +57,7 @@ class ParFormat {
 	 * 'justify'- justify alignment
 	 * @access public	 
 	 */
-	function ParFormat($alignment = 'left') {		
+	function __construct($alignment = 'left') {		
 		switch ($alignment) {			
 			case 'left':			
 				$this->alignment = '\ql';
@@ -153,7 +153,7 @@ class ParFormat {
 	 * @access public
 	 */
   	function setBackColor($backColor) {
-		$this->backColor = Util::formatColor($backColor);			
+		$this->backColor = (new Util())->formatColor($backColor);			
 	}
 	
 	/**

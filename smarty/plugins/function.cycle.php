@@ -63,7 +63,7 @@ function smarty_function_cycle($params, &$smarty)
         $cycle_vars[$name]['values'] = $params['values'];
     }
 
-    $cycle_vars[$name]['delimiter'] = (isset($params['delimiter'])) ? $params['delimiter'] : ',';
+    $cycle_vars[$name]['delimiter'] = $params['delimiter'] ?? ',';
     
     if(is_array($cycle_vars[$name]['values'])) {
         $cycle_array = $cycle_vars[$name]['values'];

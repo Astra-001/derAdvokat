@@ -1,11 +1,11 @@
 <?php /* Smarty version 2.6.18, created on 2014-07-18 20:52:10
          compiled from /var/customers/webs/strauchyve/derAdvokat/tpl/userliste.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'date_format', '/var/customers/webs/strauchyve/derAdvokat/tpl/userliste.tpl', 60, false),)), $this); ?>
+smarty_core_load_plugins(['plugins' => [['modifier', 'date_format', '/var/customers/webs/strauchyve/derAdvokat/tpl/userliste.tpl', 60, false]]], $this); ?>
 <!--<script type="text/javascript" src="/derAdvokat/js/monitoring.js"></script>  -->
 <script type="text/javascript" src="/derAdvokat/js/checkbox_markierung.js"></script>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
-$this->_smarty_include(array('smarty_include_tpl_file' => (@SMARTY_TEMPLATE_DIR)."seiten_incl.tpl", 'smarty_include_vars' => array()));
+$this->_smarty_include(['smarty_include_tpl_file' => (@SMARTY_TEMPLATE_DIR)."seiten_incl.tpl", 'smarty_include_vars' => []]);
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
@@ -52,7 +52,7 @@ unset($_smarty_tpl_vars);
 		<!-- GAST MONITORING -->
 		<div id="gast_container">
 		<div style="height:auto;max-height:200px;overflow-y:scroll;">
-		<?php $_from = $this->_tpl_vars['logsArray'][0]; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }$this->_foreach['logsArray'] = array('total' => count($_from), 'iteration' => 0);
+		<?php $_from = $this->_tpl_vars['logsArray'][0]; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }$this->_foreach['logsArray'] = ['total' => is_countable($_from) ? count($_from) : 0, 'iteration' => 0];
 if ($this->_foreach['logsArray']['total'] > 0):
     foreach ($_from as $this->_tpl_vars['l']):
         $this->_foreach['logsArray']['iteration']++;
@@ -63,7 +63,7 @@ if ($this->_foreach['logsArray']['total'] > 0):
 );">
 		<tr>
 			<td colspan="4" bgcolor="#0a264e"><?php $_smarty_tpl_vars = $this->_tpl_vars;
-$this->_smarty_include(array('smarty_include_tpl_file' => (@SMARTY_TEMPLATE_DIR)."log_module.tpl", 'smarty_include_vars' => array()));
+$this->_smarty_include(['smarty_include_tpl_file' => (@SMARTY_TEMPLATE_DIR)."log_module.tpl", 'smarty_include_vars' => []]);
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?></td>
@@ -110,7 +110,7 @@ sortiert nach <select onchange="javascript:document.userliste_form.submit();" na
 
 <table border="0" cellpadding="5" class="contenttable" width="100%">
 
-<?php $_from = $this->_tpl_vars['user']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }$this->_foreach['user'] = array('total' => count($_from), 'iteration' => 0);
+<?php $_from = $this->_tpl_vars['user']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }$this->_foreach['user'] = ['total' => is_countable($_from) ? count($_from) : 0, 'iteration' => 0];
 if ($this->_foreach['user']['total'] > 0):
     foreach ($_from as $this->_tpl_vars['u']):
         $this->_foreach['user']['iteration']++;
@@ -181,7 +181,7 @@ if ($this->_foreach['user']['total'] > 0):
 	<td colspan="5">
 
 		<?php $_smarty_tpl_vars = $this->_tpl_vars;
-$this->_smarty_include(array('smarty_include_tpl_file' => (@SMARTY_TEMPLATE_DIR)."log.tpl", 'smarty_include_vars' => array()));
+$this->_smarty_include(['smarty_include_tpl_file' => (@SMARTY_TEMPLATE_DIR)."log.tpl", 'smarty_include_vars' => []]);
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
@@ -199,7 +199,7 @@ unset($_smarty_tpl_vars);
 </form>
 <br/><br/>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
-$this->_smarty_include(array('smarty_include_tpl_file' => (@SMARTY_TEMPLATE_DIR)."seiten_incl.tpl", 'smarty_include_vars' => array()));
+$this->_smarty_include(['smarty_include_tpl_file' => (@SMARTY_TEMPLATE_DIR)."seiten_incl.tpl", 'smarty_include_vars' => []]);
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>

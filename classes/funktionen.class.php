@@ -5,14 +5,9 @@ if(!defined('INDEX_LOAD')) {
 
 class funktionen
 {
- 	private $_smarty = null;
- 	private $_database = null;
-
-	public function __construct($_smarty,$_database)
-	{
-		$this->_smarty = $_smarty;
-		$this->_database = $_database;
-	}
+ 	public function __construct(private $_smarty, private $_database)
+ {
+ }
 
 	/*public function log_sort($url)
 	{
@@ -106,7 +101,7 @@ class funktionen
 		#print_r($nl);
 		#echo "</pre>";
 
-		$artikelIds = array();
+		$artikelIds = [];
 		foreach ($nlArtikel as $temp) {
 		    array_push($artikelIds, $temp['artikel_id']);
 		}
@@ -157,7 +152,8 @@ class funktionen
 	}
 	public function job_eintrag(&$smarty,&$_database)
 	{
-		if(isset($_POST['nl_id']))
+		$id = null;
+  if(isset($_POST['nl_id']))
 		{
 			#echo "nl_id-".$_POST['nl_id'];
 			$id=$_POST['nl_id'];
@@ -248,7 +244,7 @@ class funktionen
 		#print_r($user_recArray);
 		#echo "</pre>";
 
-		$email = array($user_recArray);
+		$email = [$user_recArray];
 		$newsletter_id= $records[0]['id'];
 		$email = serialize($email);
 		$titel = $records[0]['titel'];
@@ -357,7 +353,13 @@ class funktionen
 	}
 	public function adressbuch_eintrag(&$smarty,&$_database)
 	{
-		if (isset($_POST['email']))
+		$email = null;
+  $name = null;
+  $vorname = null;
+  $geschlecht = null;
+  $firma_namel = null;
+  $empfanger_art = null;
+  if (isset($_POST['email']))
 	    {
 	      $email = mysql_real_escape_string($_POST['email']);
 	    }
@@ -395,7 +397,8 @@ class funktionen
 
 	public function show_edit_empfanger(&$_smarty,&$_database)
 	{
-		$newsletter_empfanger = new mysqlTable($this->_database, 'newsletter_empfanger');
+		$recordsArray = [];
+  $newsletter_empfanger = new mysqlTable($this->_database, 'newsletter_empfanger');
 		$newsletter_empfanger->setWhere('`parent_id`='.$_GET['nl_id']);
 	  	$newsletter_empfanger->select();
 		$records = $newsletter_empfanger->getRecords();
@@ -432,7 +435,8 @@ class funktionen
 
 	public function newsletter_artikeln($newsletter_id,&$_smarty,&$_database)
 	{
-		$records_nl_art = new mysqlTable($this->_database, 'newsletter_artikeln');
+		$recordsArray = [];
+  $records_nl_art = new mysqlTable($this->_database, 'newsletter_artikeln');
 		$records_nl_art->setWhere('`parent_id`='.$newsletter_id);
 	  	$records_nl_art->select();
 		$records_nl_art = $records_nl_art->getRecords();
@@ -497,13 +501,14 @@ class funktionen
 	}
 	public function show_artikel_newsletter(&$smarty,&$_database)
 	{
-		$kategorien = new mysqlTable($_database, 'kategorien');
+		$records_nl_artArray = [];
+  $kategorien = new mysqlTable($_database, 'kategorien');
 		$artikel = new mysqlTable($_database, 'artikel');
 
 		$kategorien->select();
 		$kat = $kategorien->getRecords();
 		#print $kategorien->$sql;
-		$karegorienArray = array();
+		$karegorienArray = [];
 		foreach ($kat as $katKey => $katValue)
 		{
 		   $karegorienArray[$katValue['id']] = $katValue['name'];
@@ -556,7 +561,10 @@ class funktionen
 	}
 	public function newsletter_eintrag(&$smarty,&$_database)
 	{
-		if (isset($_POST['titel']))
+		$bild = null;
+  $logo_typ = null;
+  $newsletter_aus = [];
+  if (isset($_POST['titel']))
 	  	{
 	    	$titel = mysql_real_escape_string($_POST['titel']);
 	  	}
@@ -634,7 +642,7 @@ class funktionen
 		    #print_r($newsletter_aus);
 		    #echo "</pre>";
 
-		    $anz=count($_POST['artikel']);#echo "ANZ-".
+		    $anz=is_countable($_POST['artikel']) ? count($_POST['artikel']) : 0;#echo "ANZ-".
 
 		    $newsletter_artikeln = new mysqlTable($_database, 'newsletter_artikeln');
 
@@ -679,7 +687,7 @@ class funktionen
 		    }
 
 		    //------------newsletter_empfangerTAB-------------//
-		    $empf_anz=count($_POST['empfanger']);#echo "ANZ-".
+		    $empf_anz=is_countable($_POST['empfanger']) ? count($_POST['empfanger']) : 0;#echo "ANZ-".
 
 		    $newsletter_empfanger = new mysqlTable($_database, 'newsletter_empfanger');
             //   echo "<br>count-".$anz_eintragen=count($_POST['type']);
@@ -734,10 +742,10 @@ class funktionen
 	}
 	public function eingabe_check()
 	{
-		if($_FILES['bild']['size']>3500000)
+		if($_FILES['bild']['size']>3_500_000)
 		{
 		  $meldung="Das Bild ist zu gross !";
-		  return array(FALSE,$meldung);
+		  return [FALSE, $meldung];
 		}
 		if(is_uploaded_file($_FILES['bild']['tmp_name']))
 	  	{
@@ -747,27 +755,27 @@ class funktionen
 					$_FILES['bild']['type']=='image/png'))
 			{
 				$meldung="Der Dateityp des Bildes ist nicht zulaessig !";
-				return array(FALSE,$meldung);
+				return [FALSE, $meldung];
 			}
 		}
 	  	if($_POST['titel']=="")
 	  	{
 	  		$meldung="Titel fehlt";
-	  		return array(FALSE,$meldung);
+	  		return [FALSE, $meldung];
 	  	}
 		if($_POST['inhalt']=="")
 	  	{
 	  		$meldung="Inhalt fehlt";
-	  		return array(FALSE,$meldung);
+	  		return [FALSE, $meldung];
 	  	}
-	  	$empf_anz=count($_POST['empfanger']);
+	  	$empf_anz=is_countable($_POST['empfanger']) ? count($_POST['empfanger']) : 0;
 
 		if($empf_anz==0)
 	  	{
 	  		$meldung="Bitte Empf&auml;nger ausw&auml;hlen";
-	  		return array(FALSE,$meldung);
+	  		return [FALSE, $meldung];
 	  	}
-	  	return array(TRUE,"Eintrag erfolgreich");
+	  	return [TRUE, "Eintrag erfolgreich"];
 	}
 	public function resizeImage($src, $des, $x, $y, $type)
 	{

@@ -27,9 +27,9 @@
 class Header extends Container {
 
 	/**#@+ @access private */  
-	var $type;	
+	public $type;	
 	
-	var $headery;
+	public $headery;
 	/**#@-*/  
   	
   	/**
@@ -38,7 +38,7 @@ class Header extends Container {
   	 * @param string $type
   	 * @access public
   	 */
-  	function Header(&$rtf, $type) {	    
+  	function __construct(&$rtf, $type) {	    
 	    $this->rtf = &$rtf;	
 	    
 	    switch ($type) {		  

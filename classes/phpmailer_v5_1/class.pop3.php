@@ -118,19 +118,17 @@ class POP3 {
   // PROPERTIES, PRIVATE AND PROTECTED
   /////////////////////////////////////////////////
 
-  private $pop_conn;
-  private $connected;
-  private $error;     //  Error log array
+  private $pop_conn = 0;
+  private bool $connected = false;
+  private null|array|string $error = null;     //  Error log array
 
   /**
    * Constructor, sets the initial values
    * @access public
    * @return POP3
    */
-  public function __construct() {
-    $this->pop_conn  = 0;
-    $this->connected = false;
-    $this->error     = null;
+  public function __construct()
+  {
   }
 
   /**
@@ -142,7 +140,7 @@ class POP3 {
    * @param string $username
    * @param string $password
    */
-  public function Authorise ($host, $port = false, $tval = false, $username, $password, $debug_level = 0) {
+  public function Authorise ($host, $username, $password, $port = false, $tval = false, $debug_level = 0) {
     $this->host = $host;
 
     //  If no port value is passed, retrieve it
@@ -205,7 +203,7 @@ class POP3 {
     Rather than supress it with @fsockopen, let's capture it cleanly instead
     */
 
-    set_error_handler(array(&$this, 'catchWarning'));
+    set_error_handler([&$this, 'catchWarning']);
 
     //  Connect to the POP3 server
     $this->pop_conn = fsockopen($host,    //  POP3 Host
@@ -225,11 +223,7 @@ class POP3 {
     //  Did we connect?
     if ($this->pop_conn == false) {
       //  It would appear not...
-      $this->error = array(
-        'error' => "Failed to connect to server $host on port $port",
-        'errno' => $errno,
-        'errstr' => $errstr
-      );
+      $this->error = ['error' => "Failed to connect to server $host on port $port", 'errno' => $errno, 'errstr' => $errstr];
 
       if ($this->do_debug >= 1) {
         $this->displayErrors();
@@ -245,7 +239,7 @@ class POP3 {
       stream_set_timeout($this->pop_conn, $tval, 0);
     } else {
       //  Does not work on Windows
-      if (substr(PHP_OS, 0, 3) !== 'WIN') {
+      if (!str_starts_with(PHP_OS, 'WIN')) {
         socket_set_timeout($this->pop_conn, $tval, 0);
       }
     }
@@ -354,12 +348,8 @@ class POP3 {
    * @return boolean
    */
   private function checkResponse ($string) {
-    if (substr($string, 0, 3) !== '+OK') {
-      $this->error = array(
-        'error' => "Server reported an error: $string",
-        'errno' => 0,
-        'errstr' => ''
-      );
+    if (!str_starts_with($string, '+OK')) {
+      $this->error = ['error' => "Server reported an error: $string", 'errno' => 0, 'errstr' => ''];
 
       if ($this->do_debug >= 1) {
         $this->displayErrors();
@@ -395,11 +385,7 @@ class POP3 {
    * @param integer $errline
    */
   private function catchWarning ($errno, $errstr, $errfile, $errline) {
-    $this->error[] = array(
-      'error' => "Connecting to the POP3 server raised a PHP warning: ",
-      'errno' => $errno,
-      'errstr' => $errstr
-    );
+    $this->error[] = ['error' => "Connecting to the POP3 server raised a PHP warning: ", 'errno' => $errno, 'errstr' => $errstr];
   }
 
   //  End of class

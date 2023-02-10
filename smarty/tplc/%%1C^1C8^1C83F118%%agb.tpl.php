@@ -8,7 +8,7 @@
 <table border="0" cellpadding="5" class="contenttable">
 <tr>
 	<td><?php $_smarty_tpl_vars = $this->_tpl_vars;
-$this->_smarty_include(array('smarty_include_tpl_file' => (@SMARTY_TEMPLATE_DIR)."agb_text.tpl", 'smarty_include_vars' => array()));
+$this->_smarty_include(['smarty_include_tpl_file' => (@SMARTY_TEMPLATE_DIR)."agb_text.tpl", 'smarty_include_vars' => []]);
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?></td>
@@ -23,7 +23,7 @@ unset($_smarty_tpl_vars);
 <table border="0" cellpadding="5" class="contenttable">
 <tr>
 	<td><?php $_smarty_tpl_vars = $this->_tpl_vars;
-$this->_smarty_include(array('smarty_include_tpl_file' => (@SMARTY_TEMPLATE_DIR)."agb_text.tpl", 'smarty_include_vars' => array()));
+$this->_smarty_include(['smarty_include_tpl_file' => (@SMARTY_TEMPLATE_DIR)."agb_text.tpl", 'smarty_include_vars' => []]);
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?></td>

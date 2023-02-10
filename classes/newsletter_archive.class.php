@@ -8,14 +8,8 @@ if ($_SESSION['user']['status'] != STATUS_ADMIN)
 }
 class newsletter_archive
 {
- 	private $_smarty = null;
- 	private $_database = null;
-
-	public function __construct($_smarty,$_database)
+ 	public function __construct(private $_smarty,private $_database)
 	{
-		$this->_smarty = $_smarty;
-		$this->_database = $_database;
-
 		$this->funktionen= new funktionen($_smarty,$_database);
 		
 		if($_POST['versand'])
