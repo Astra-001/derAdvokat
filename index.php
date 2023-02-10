@@ -16,7 +16,6 @@ require_once("includes/includes.php");
 session_start();
 $database = new mysqlDatabase();
 $result = $database->openDB();
-
 $smarty = new Smarty();
 $smarty->compile_dir = SMARTY_TEMPLATE_CACHE_DIR;
 

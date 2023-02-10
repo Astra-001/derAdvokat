@@ -94,7 +94,7 @@ class mysqlTable
 					print_r( $record );
 					print_r( $field );
 					if(isset($record[$field])) $this->$field->setValue($record[$field]);
-			else
+			else   
 				foreach($this->fields as $index => $field)
 					if(isset($record[$index])) $this->$field->setValue($record[$index]);
 		}
